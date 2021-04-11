@@ -11,12 +11,19 @@ class Diary extends StatefulWidget {
 class _DiaryState extends State<Diary> {
   DateTime curr;
   var dt;
-  int counter=0;
+  int counter = 0;
 
-  void changeDate(){
-    curr= DateTime.now();
-    var temp= curr.add(Duration(days: counter));
-    dt = formatDate(temp, [D, ', ', M, ' ', dd, ' \'', yy]);
+  void changeDate() {
+    curr = DateTime.now();
+    var temp = curr.add(Duration(days: counter));
+    if (counter == 0)
+      dt = 'Today';
+    else if (counter == 1)
+      dt = 'Tomorrow';
+    else if (counter == -1)
+      dt = 'Yesterday';
+    else
+      dt = formatDate(temp, [D, ', ', M, ' ', dd, ' \'', yy]);
   }
 
   @override
@@ -31,9 +38,9 @@ class _DiaryState extends State<Diary> {
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.2),
-                spreadRadius: 5,
-                blurRadius: 10,
-                offset: Offset(0, 0), // changes position of shadow
+                // spreadRadius: 5,
+                blurRadius: 5,
+                offset: Offset(0, 3), // changes position of shadow
               ),
             ],
           ),
@@ -43,17 +50,23 @@ class _DiaryState extends State<Diary> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton(onPressed: () {
-                setState(() {
-                  counter--;
-                });
-              }, child: Text("<", style: getAppTextStyle(16, Colors.red[400], false))),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      counter--;
+                    });
+                  },
+                  child: Text("<",
+                      style: getAppTextStyle(16, Colors.red[400], false))),
               Text(dt, style: getAppTextStyle(16, Colors.black, false)),
-              TextButton(onPressed: () {
-                setState(() {
-                  counter++;
-                });
-              }, child: Text(">", style: getAppTextStyle(16, Colors.red[400], false)))
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      counter++;
+                    });
+                  },
+                  child: Text(">",
+                      style: getAppTextStyle(16, Colors.red[400], false)))
             ],
           ),
         ),

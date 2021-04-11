@@ -24,9 +24,9 @@ class CaloriesRemaining extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 5,
-            blurRadius: 10,
-            offset: Offset(0, 0), // changes position of shadow
+            // spreadRadius: 5,
+            blurRadius: 5,
+            offset: Offset(0, 3), // changes position of shadow
           ),
         ],
       ),
@@ -39,7 +39,10 @@ class CaloriesRemaining extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text("Calories Remaining", style: getAppTextStyle(20, Colors.grey[800], true),),
+            child: Text(
+              "Calories Remaining",
+              style: getAppTextStyle(20, Colors.grey[800], true),
+            ),
           ),
           SizedBox(
             height: 15,
@@ -48,23 +51,33 @@ class CaloriesRemaining extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Column(children: [
-                Text(goal.toString(), style: getAppTextStyle(18, Colors.black, false)),
-                Text("Goal", style: getAppTextStyle(16, Colors.grey[700], false))]),
+                Text(goal.toString(),
+                    style: getAppTextStyle(18, Colors.black, false)),
+                Text("Goal",
+                    style: getAppTextStyle(16, Colors.grey[700], false))
+              ]),
               Text("-", style: getAppTextStyle(18, Colors.black, false)),
               Column(children: [
-                Text(food.toString(), style: getAppTextStyle(18, Colors.black, false)),
-                Text("Food", style: getAppTextStyle(16, Colors.grey[700], false))]),
+                Text(food.toString(),
+                    style: getAppTextStyle(18, Colors.black, false)),
+                Text("Food",
+                    style: getAppTextStyle(16, Colors.grey[700], false))
+              ]),
               Text("+", style: getAppTextStyle(18, Colors.black, false)),
               Column(children: [
-                Text(exercise.toString(), style: getAppTextStyle(18, Colors.black, false)),
-                Text("Exercise", style: getAppTextStyle(16, Colors.grey[700], false))]),
+                Text(exercise.toString(),
+                    style: getAppTextStyle(18, Colors.black, false)),
+                Text("Exercise",
+                    style: getAppTextStyle(16, Colors.grey[700], false))
+              ]),
               Text("=", style: getAppTextStyle(18, Colors.black, false)),
               Column(children: [
                 Text(
                   remaining.toString(),
                   style: getAppTextStyle(18, Colors.green, false),
                 ),
-                Text("Remaining", style: getAppTextStyle(16, Colors.grey[700], false))
+                Text("Remaining",
+                    style: getAppTextStyle(16, Colors.grey[700], false))
               ])
             ],
           )
