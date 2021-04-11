@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/caloriesRemaining.dart';
+import 'package:sprightly/widgets/widgets.dart';
+import 'package:sprightly/views/Home.dart';
+import 'package:sprightly/views/Diary.dart';
 
 class SprightlyHome extends StatefulWidget {
   @override
@@ -13,20 +16,17 @@ class _SprightlyHomeState extends State<SprightlyHome> {
   Column changeView() {
     List<Widget> list;
     if(_navigationBarCurrIndex==0){
-      list= [CaloriesRemaining(), Text("Home")];
+      return Column(children: [Home()]);
     } else if (_navigationBarCurrIndex==1){
-      list= [Text("Diary")];
+      return Column(children: [Diary()]);
     }else if (_navigationBarCurrIndex==2){
-      list= [Text("Recipes")];
+      return Column(children: [Text("Recipes")]);
     }else if (_navigationBarCurrIndex==3){
-      list= [Text("Plans")];
+      return Column(children: [Text("Plans")]);
     }else if (_navigationBarCurrIndex==4){
-      list= [Text("Account")];
+      return Column(children: [Text("Account")]);
     }
 
-    return Column(
-      children: list,
-    );
   }
 
   @override
@@ -49,6 +49,8 @@ class _SprightlyHomeState extends State<SprightlyHome> {
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          selectedLabelStyle: getAppTextStyle(12, Colors.orange[400], true),
+          unselectedLabelStyle: getAppTextStyle(12, Colors.white, false),
           currentIndex: _navigationBarCurrIndex,
           onTap: (index) {
             setState(() {
