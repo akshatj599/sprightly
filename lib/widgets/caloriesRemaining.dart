@@ -41,7 +41,7 @@ class CaloriesRemaining extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               "Calories Remaining",
-              style: getAppTextStyle(20, Colors.grey[800], true),
+              style: getAppTextStyle(18, Colors.grey[800], true),
             ),
           ),
           SizedBox(
@@ -52,32 +52,32 @@ class CaloriesRemaining extends StatelessWidget {
             children: [
               Column(children: [
                 Text(goal.toString(),
-                    style: getAppTextStyle(18, Colors.black, false)),
+                    style: getAppTextStyle(16, Colors.black, false)),
                 Text("Goal",
-                    style: getAppTextStyle(16, Colors.grey[700], false))
+                    style: getAppTextStyle(14, Colors.grey[700], false))
               ]),
-              Text("-", style: getAppTextStyle(18, Colors.black, false)),
+              Text("-", style: getAppTextStyle(16, Colors.black, false)),
               Column(children: [
                 Text(food.toString(),
-                    style: getAppTextStyle(18, Colors.black, false)),
+                    style: getAppTextStyle(16, Colors.black, false)),
                 Text("Food",
-                    style: getAppTextStyle(16, Colors.grey[700], false))
+                    style: getAppTextStyle(14, Colors.grey[700], false))
               ]),
-              Text("+", style: getAppTextStyle(18, Colors.black, false)),
+              Text("+", style: getAppTextStyle(16, Colors.black, false)),
               Column(children: [
                 Text(exercise.toString(),
-                    style: getAppTextStyle(18, Colors.black, false)),
+                    style: getAppTextStyle(16, Colors.black, false)),
                 Text("Exercise",
-                    style: getAppTextStyle(16, Colors.grey[700], false))
+                    style: getAppTextStyle(14, Colors.grey[700], false))
               ]),
-              Text("=", style: getAppTextStyle(18, Colors.black, false)),
+              Text("=", style: getAppTextStyle(16, Colors.black, false)),
               Column(children: [
                 Text(
                   remaining.toString(),
-                  style: getAppTextStyle(18, Colors.green, false),
+                  style: getAppTextStyle(16, Colors.green, false),
                 ),
                 Text("Remaining",
-                    style: getAppTextStyle(16, Colors.grey[700], false))
+                    style: getAppTextStyle(14, Colors.grey[700], false))
               ])
             ],
           )

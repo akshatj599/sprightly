@@ -14,19 +14,18 @@ class SprightlyHome extends StatefulWidget {
 class _SprightlyHomeState extends State<SprightlyHome> {
   int _navigationBarCurrIndex = 0;
 
-  Column changeView() {
-    if(_navigationBarCurrIndex==0){
+  Widget changeView() {
+    if (_navigationBarCurrIndex == 0) {
       return Column(children: [Home()]);
-    } else if (_navigationBarCurrIndex==1){
-      return Column(mainAxisSize: MainAxisSize.min,children: [Diary()]);
-    }else if (_navigationBarCurrIndex==2){
-      return Column(children: [Text("Recipes")]);
-    }else if (_navigationBarCurrIndex==3){
-      return Column(children: [Text("Plans")]);
-    }else if (_navigationBarCurrIndex==4){
-      return Column(children: [Text("Account")]);
+    } else if (_navigationBarCurrIndex == 1) {
+      return Container(child: Diary());
+    } else if (_navigationBarCurrIndex == 2) {
+      return Container(child: Text("Recipes"));
+    } else if (_navigationBarCurrIndex == 3) {
+      return Container(child: Text("Plans"));
+    } else if (_navigationBarCurrIndex == 4) {
+      return Container(child: Text("Account"));
     }
-
   }
 
   @override
@@ -40,13 +39,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
           centerTitle: true,
         ),
         body: SafeArea(
-          child: Column(
-            children: [
-              Center(
-                child: changeView(),
-              )
-            ],
-          ),
+          child: changeView(),
         ),
         bottomNavigationBar: BottomNavigationBar(
           selectedLabelStyle: getAppTextStyle(12, Colors.orange[400], true),
@@ -77,7 +70,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
         ),
       ),
     );
-    globals.context=context;
+    globals.context = context;
     return container;
   }
 }

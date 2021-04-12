@@ -38,68 +38,60 @@ class _DiaryState extends State<Diary> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    // spreadRadius: 5,
-                    blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                // spreadRadius: 5,
+                blurRadius: 5,
+                offset: Offset(0, 3), // changes position of shadow
               ),
-              width: double.infinity,
-              // padding: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-              margin: EdgeInsets.fromLTRB(5, 10, 5, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        setState(() {
-                          counter--;
-                        });
-                      },
-                      child: Text("<",
-                          style: getAppTextStyle(16, Colors.red[400], false))),
-                  Text(dt, style: getAppTextStyle(16, Colors.black, false)),
-                  TextButton(
-                      onPressed: () {
-                        setState(() {
-                          counter++;
-                        });
-                      },
-                      child: Text(">",
-                          style: getAppTextStyle(16, Colors.red[400], false)))
-                ],
-              ),
-            ),
-            CaloriesRemaining(),
-          ],
+            ],
+          ),
+          width: double.infinity,
+          // padding: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
+          margin: EdgeInsets.fromLTRB(5, 10, 5, 0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      counter--;
+                    });
+                  },
+                  child: Text("<",
+                      style: getAppTextStyle(16, Colors.red[400], false))),
+              Text(dt, style: getAppTextStyle(16, Colors.black, false)),
+              TextButton(
+                  onPressed: () {
+                    setState(() {
+                      counter++;
+                    });
+                  },
+                  child: Text(">",
+                      style: getAppTextStyle(16, Colors.red[400], false)))
+            ],
+          ),
         ),
-
-        Column(
-          children: [
-            Container(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    getDiaryMealCard("Breakfast", breakfastCalories),
-                    getDiaryMealCard("Lunch", lunchCalories),
-                    getDiaryMealCard("Dinner", dinnerCalories),
-                    getDiaryMealCard("Snacks", snacksCalories),
-                  ],
-                ),
-              ),
+        CaloriesRemaining(),
+        Expanded(
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                getDiaryMealCard("Breakfast", breakfastCalories),
+                getDiaryMealCard("Lunch", lunchCalories),
+                getDiaryMealCard("Dinner", dinnerCalories),
+                getDiaryMealCard("Snacks", snacksCalories),
+                getDiaryMealCard("Exercise", exerciseCalories),
+              ],
             ),
-          ],
+          ),
         )
       ],
     );
