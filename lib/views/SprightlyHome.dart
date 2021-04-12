@@ -4,6 +4,7 @@ import 'package:sprightly/widgets/caloriesRemaining.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/views/Home.dart';
 import 'package:sprightly/views/Diary.dart';
+import 'package:sprightly/widgets/globals.dart' as globals;
 
 class SprightlyHome extends StatefulWidget {
   @override
@@ -14,11 +15,10 @@ class _SprightlyHomeState extends State<SprightlyHome> {
   int _navigationBarCurrIndex = 0;
 
   Column changeView() {
-    List<Widget> list;
     if(_navigationBarCurrIndex==0){
       return Column(children: [Home()]);
     } else if (_navigationBarCurrIndex==1){
-      return Column(children: [Diary()]);
+      return Column(mainAxisSize: MainAxisSize.min,children: [Diary()]);
     }else if (_navigationBarCurrIndex==2){
       return Column(children: [Text("Recipes")]);
     }else if (_navigationBarCurrIndex==3){
@@ -31,7 +31,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    var container = Container(
       child: Scaffold(
         backgroundColor: Colors.grey[350],
         appBar: AppBar(
@@ -77,5 +77,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
         ),
       ),
     );
+    globals.context=context;
+    return container;
   }
 }
