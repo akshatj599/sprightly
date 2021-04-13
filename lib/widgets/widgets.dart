@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 TextStyle getAppTextStyle(double size, Color color, bool isBold) {
   FontWeight fontWeight;
@@ -11,4 +12,23 @@ TextStyle getAppTextStyle(double size, Color color, bool isBold) {
       color: color,
       fontFamily: "Poppins",
       fontWeight: fontWeight);
+}
+
+void showSnackBar(String textToDisplay, BuildContext context){
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text(textToDisplay))
+  );
+}
+
+String capitalizeEachWord(String input, bool doLower) {
+  if(doLower){
+    input = input.toLowerCase();
+  }
+  List<String> list = input.split(' ');
+  String output = "";
+  list.forEach((element) {
+    element = element[0].toUpperCase() + element.substring(1);
+    output += element + " ";
+  });
+  return output.trimRight();
 }

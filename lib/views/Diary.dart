@@ -87,7 +87,7 @@ class _DiaryState extends State<Diary> {
                 getDiaryMealCard("Breakfast", breakfastCalories),
                 getDiaryMealCard("Lunch", lunchCalories),
                 getDiaryMealCard("Dinner", dinnerCalories),
-                getDiaryMealCard("Snacks", snacksCalories),
+                getDiaryMealCard("Snack", snacksCalories),
                 getDiaryMealCard("Exercise", exerciseCalories),
               ],
             ),
