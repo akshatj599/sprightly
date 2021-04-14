@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sprightly/views/SprightlyHome.dart';
+import 'package:sprightly/views/Sprightly.dart';
 
 void main() {
   runApp(MyApp());

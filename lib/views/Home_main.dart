@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sprightly/Home_BMI/screens/input_page.dart';
 import 'package:sprightly/widgets/caloriesRemaining.dart';
 
 class Home extends StatefulWidget {
@@ -12,7 +13,9 @@ class _HomeState extends State<Home> {
     //TODO: BMI
     return Column(
       children: [
-        CaloriesRemaining()
+        CaloriesRemaining(),
+        Divider(color: Colors.grey[800],endIndent: 20, indent: 20,),
+        InputPage()
       ],
     );
   }

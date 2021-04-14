@@ -31,6 +31,7 @@ dependencies:
   date_format: ^2.0.2
   http: ^0.13.1
   pie_chart: ^4.0.1
+  font_awesome_flutter: ^8.4.0
 
 dev_dependencies:
   flutter_test:

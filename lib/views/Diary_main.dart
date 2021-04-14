@@ -36,7 +36,6 @@ class _DiaryState extends State<Diary> {
   Widget build(BuildContext context) {
     changeDate();
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           decoration: BoxDecoration(
@@ -82,7 +81,6 @@ class _DiaryState extends State<Diary> {
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
               children: [
                 getDiaryMealCard("Breakfast", breakfastCalories),
                 getDiaryMealCard("Lunch", lunchCalories),

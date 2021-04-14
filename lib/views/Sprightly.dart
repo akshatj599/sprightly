@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/caloriesRemaining.dart';
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/views/Home.dart';
-import 'package:sprightly/views/Diary.dart';
+import 'package:sprightly/views/Home_main.dart';
+import 'package:sprightly/views/Diary_main.dart';
 import 'package:sprightly/widgets/globals.dart' as globals;
 
 class SprightlyHome extends StatefulWidget {
@@ -16,7 +16,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
 
   Widget changeView() {
     if (_navigationBarCurrIndex == 0) {
-      return Column(children: [Home()]);
+      return Container(child: Home());
     } else if (_navigationBarCurrIndex == 1) {
       return Container(child: Diary());
     } else if (_navigationBarCurrIndex == 2) {

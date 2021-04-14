@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/views/searchFoodView.dart';
+import 'package:sprightly/views/Diary_searchFoodView.dart';
 import 'package:sprightly/widgets/globals.dart' as globals;
 
 Column getDiaryMealCard(String mealName, int calories){

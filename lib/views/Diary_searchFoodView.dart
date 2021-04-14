@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/views/showFoodDetailsView.dart';
+import 'package:sprightly/views/Diary_showFoodDetailsView.dart';
 import 'package:http/http.dart' as http;
 
 class SearchFoodView extends StatefulWidget {
