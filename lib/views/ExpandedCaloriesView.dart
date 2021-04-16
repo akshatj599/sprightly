@@ -87,10 +87,10 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
         child: Scaffold(
       backgroundColor: glb.main_scaffold_background,
       appBar: glb.appBar_Sprightly(() {
-          setState(() {
-            glb.switchTheme();
-          });
-        }),
+        setState(() {
+          glb.switchTheme();
+        });
+      }),
       body: SafeArea(
         child: Column(
           children: [
@@ -160,8 +160,12 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
                 legendOptions: LegendOptions(
                   showLegends: true,
                   legendPosition: LegendPosition.right,
-                  legendTextStyle:
-                      getAppTextStyle(14, glb.main_foreground_header, false),
+                  legendTextStyle: getAppTextStyle(
+                      14,
+                      glb.dark_theme
+                          ? glb.main_foreground_header
+                          : glb.main_foreground_dimmer,
+                      false),
                 ),
               ),
             ),

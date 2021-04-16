@@ -39,7 +39,8 @@ class _InputPageState extends State<InputPage> {
               margin: EdgeInsets.symmetric(horizontal: 5),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: glb.main_background, borderRadius: BorderRadius.circular(10)),
+                  color: glb.main_background,
+                  borderRadius: BorderRadius.circular(10)),
               child: Text(
                 "Calculate Your BMI",
                 style: getAppTextStyle(18, glb.main_foreground_header, true),
@@ -61,7 +62,9 @@ class _InputPageState extends State<InputPage> {
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.mars,
                       label: 'MALE',
-                      iconColor: selectedGender == Gender.male ? Colors.grey[800]: glb.main_foreground_header,
+                      iconColor: selectedGender == Gender.male
+                          ? Colors.grey[800]
+                          : glb.main_foreground_header,
                     ),
                   ),
                 ),
@@ -75,10 +78,12 @@ class _InputPageState extends State<InputPage> {
                     colour: selectedGender == Gender.female
                         ? Color(0xFFfab1f5)
                         : glb.main_background,
-                    cardChild: IconContent(                    
+                    cardChild: IconContent(
                       icon: FontAwesomeIcons.venus,
                       label: 'FEMALE',
-                      iconColor: selectedGender == Gender.female ? Colors.grey[800]: glb.main_foreground_header,
+                      iconColor: selectedGender == Gender.female
+                          ? Colors.grey[800]
+                          : glb.main_foreground_header,
                     ),
                   ),
                 ),
@@ -91,7 +96,8 @@ class _InputPageState extends State<InputPage> {
                 children: <Widget>[
                   Text(
                     'HEIGHT',
-                    style: getAppTextStyle(14, glb.main_foreground_header, false),
+                    style:
+                        getAppTextStyle(14, glb.main_foreground_header, false),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
@@ -102,11 +108,13 @@ class _InputPageState extends State<InputPage> {
                       children: <Widget>[
                         Text(
                           height.toString(),
-                          style: getAppTextStyle(25, glb.main_foreground_header, true),
+                          style: getAppTextStyle(
+                              25, glb.main_foreground_header, true),
                         ),
                         Text(
                           ' cm',
-                          style: getAppTextStyle(14, glb.main_foreground_header, false),
+                          style: getAppTextStyle(
+                              14, glb.main_foreground_header, false),
                         )
                       ],
                     ),
@@ -115,7 +123,9 @@ class _InputPageState extends State<InputPage> {
                     data: SliderTheme.of(context).copyWith(
                       inactiveTrackColor: Colors.grey[200],
                       activeTrackColor: Colors.orange[300],
-                      thumbColor: Colors.pink[400],
+                      thumbColor: glb.dark_theme
+                          ? Colors.purple[900]
+                          : Colors.pink[400],
                       overlayColor: Color(0x29EB1555),
                       thumbShape:
                           RoundSliderThumbShape(enabledThumbRadius: 15.0),
@@ -146,7 +156,8 @@ class _InputPageState extends State<InputPage> {
                       children: <Widget>[
                         Text(
                           'WEIGHT',
-                          style: getAppTextStyle(14, glb.main_foreground_header, false),
+                          style: getAppTextStyle(
+                              14, glb.main_foreground_header, false),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5),
@@ -157,11 +168,13 @@ class _InputPageState extends State<InputPage> {
                             children: [
                               Text(
                                 weight.toString(),
-                                style: getAppTextStyle(25, glb.main_foreground_header, true),
+                                style: getAppTextStyle(
+                                    25, glb.main_foreground_header, true),
                               ),
                               Text(
                                 " kg",
-                                style: getAppTextStyle(14, glb.main_foreground_header, false),
+                                style: getAppTextStyle(
+                                    14, glb.main_foreground_header, false),
                               ),
                             ],
                           ),
@@ -201,7 +214,8 @@ class _InputPageState extends State<InputPage> {
                       children: <Widget>[
                         Text(
                           'AGE',
-                          style: getAppTextStyle(14, glb.main_foreground_header, false),
+                          style: getAppTextStyle(
+                              14, glb.main_foreground_header, false),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5),
@@ -212,11 +226,13 @@ class _InputPageState extends State<InputPage> {
                             children: [
                               Text(
                                 age.toString(),
-                                style: getAppTextStyle(25, glb.main_foreground_header, true),
+                                style: getAppTextStyle(
+                                    25, glb.main_foreground_header, true),
                               ),
                               Text(
                                 " yr",
-                                style: getAppTextStyle(14, glb.main_foreground_header, false),
+                                style: getAppTextStyle(
+                                    14, glb.main_foreground_header, false),
                               )
                             ],
                           ),

@@ -85,8 +85,8 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Serving",
-                                style:
-                                    getAppTextStyle(16, glb.main_foreground_header, false)),
+                                style: getAppTextStyle(
+                                    16, glb.main_foreground_header, false)),
                             Text("100 g",
                                 style: getAppTextStyle(
                                     16, glb.main_foreground_dimmer, false))
@@ -115,8 +115,12 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                           chartValuesOptions:
                               ChartValuesOptions(showChartValues: false),
                           legendOptions: LegendOptions(
-                              legendTextStyle:
-                                  getAppTextStyle(14, glb.main_foreground_dimmer, false)),
+                              legendTextStyle: getAppTextStyle(
+                                  14,
+                                  glb.dark_theme
+                                      ? glb.main_foreground_header
+                                      : glb.main_foreground_dimmer,
+                                  false)),
                         ),
                       ),
                       makeNutrientListColumn(context)
@@ -141,7 +145,8 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
             Container(
               width: MediaQuery.of(context).size.width / 1.5,
               child: Text(capitalizeEachWord(element['nutrientName'], false),
-                  style: getAppTextStyle(16, glb.main_foreground_header, false)),
+                  style:
+                      getAppTextStyle(16, glb.main_foreground_header, false)),
             ),
             Text(
                 element['value'].toString() +

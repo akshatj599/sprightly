@@ -17,16 +17,18 @@ class BottomButton extends StatelessWidget {
         child: Center(
           child: Text(
             buttonTitle,
-            style: getAppTextStyle(16, Colors.white, true),
+            style: getAppTextStyle(
+                16,
+                glb.dark_theme ? glb.main_foreground_header : Colors.white,
+                true),
           ),
         ),
         margin: EdgeInsets.fromLTRB(5, 0, 5, 20),
         padding: EdgeInsets.all(10),
-        width: MediaQuery.of(context).size.width/2,
+        width: MediaQuery.of(context).size.width / 2,
         decoration: BoxDecoration(
-          color: kBottomContainerColour,
-          borderRadius: BorderRadius.circular(10)
-        ),
+            color: glb.dark_theme ? Colors.purple[900] : kBottomContainerColour,
+            borderRadius: BorderRadius.circular(10)),
       ),
     );
   }
