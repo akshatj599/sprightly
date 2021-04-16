@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sprightly/Home_BMI/constants.dart';
 import 'package:sprightly/widgets/widgets.dart';
+import 'package:sprightly/widgets/globals.dart' as glb;
 
 class BottomButton extends StatelessWidget {
   BottomButton({@required this.onTap, @required this.buttonTitle});
@@ -19,7 +20,7 @@ class BottomButton extends StatelessWidget {
             style: getAppTextStyle(16, Colors.white, true),
           ),
         ),
-        margin: EdgeInsets.fromLTRB(5, 10, 5, 20),
+        margin: EdgeInsets.fromLTRB(5, 0, 5, 20),
         padding: EdgeInsets.all(10),
         width: MediaQuery.of(context).size.width/2,
         decoration: BoxDecoration(

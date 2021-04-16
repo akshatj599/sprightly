@@ -7,18 +7,13 @@ import 'package:flutter/widgets.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/views/Diary_showFoodDetailsView.dart';
 import 'package:http/http.dart' as http;
-import 'package:sprightly/widgets/globals.dart' as glb;
 
-class SearchFoodView extends StatefulWidget {
-  String mealType;
-
-  SearchFoodView(this.mealType);
-
+class SearchExerciseView extends StatefulWidget {
   @override
-  _SearchFoodViewState createState() => _SearchFoodViewState();
+  _SearchExerciseViewState createState() => _SearchExerciseViewState();
 }
 
-class _SearchFoodViewState extends State<SearchFoodView> {
+class _SearchExerciseViewState extends State<SearchExerciseView> {
   List<dynamic> initialItems = [];
   List<Widget> finalItems = [];
   TextEditingController searchEditingController = TextEditingController();
@@ -30,12 +25,12 @@ class _SearchFoodViewState extends State<SearchFoodView> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-          backgroundColor: glb.main_background,
-          appBar: glb.appBar_Sprightly(() {
-            setState(() {
-              glb.switchTheme();
-            });
-          }),
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            backgroundColor: Colors.orange[400],
+            title: Image.asset('images/sprightly_logo.png', height: 40),
+            centerTitle: true,
+          ),
           body: SafeArea(
             child: Container(
               padding: EdgeInsets.all(20),
@@ -43,9 +38,8 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: Text("Add A " + widget.mealType + " Item",
-                        style: getAppTextStyle(
-                            20, glb.main_foreground_header, true)),
+                    child: Text("Add An " + "Exercise",
+                        style: getAppTextStyle(20, Colors.grey[800], true)),
                   ),
                   SizedBox(
                     height: 20,
@@ -104,18 +98,18 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                                   SizedBox(height: 40),
                                   Icon(
                                     Icons.add_circle_rounded,
-                                    color: glb.main_foreground_dimmer,
+                                    color: Colors.grey[600],
                                   ),
                                   SizedBox(height: 15),
                                   Text(
-                                    "What did you munch?",
+                                    "Which exercise made those calories burn?",
                                     style: getAppTextStyle(
-                                        14, glb.main_foreground_dimmer, false),
+                                        14, Colors.grey[600], false),
                                   ),
                                   SizedBox(height: 2),
                                   Text("Search for it in the search box.",
-                                      style: getAppTextStyle(14,
-                                          glb.main_foreground_dimmer, false))
+                                      style: getAppTextStyle(
+                                          14, Colors.grey[600], false))
                                 ],
                               ),
                             )
@@ -126,9 +120,9 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                                   itemBuilder: (context, index) {
                                     return (index != 0 && index != 1)
                                         ? GestureDetector(
-                                            onTap: () async {
-                                              await Navigator.of(context)
-                                                  .push(PageRouteBuilder(
+                                            onTap: () {
+                                              Navigator.of(context).push(
+                                                  PageRouteBuilder(
                                                       pageBuilder: (context,
                                                           animation,
                                                           anotherAnimation) {
@@ -155,11 +149,7 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                                                                   animation),
                                                           child: child,
                                                         );
-                                                      }))
-                                                  .then((value) {
-                                                glb.bnb.onTap(
-                                                    glb.bnb.currentIndex);
-                                              });
+                                                      }));
                                             },
                                             child: Container(
                                               padding: EdgeInsets.symmetric(
@@ -169,17 +159,11 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                                               decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(5),
-                                                  color: glb.main_secondary),
+                                                  color: Colors.orange[50]),
                                               child: finalItems[index],
                                             ),
                                           )
-                                        : (index == 0
-                                            ? Text(" Results (per 100 g):",
-                                                style: getAppTextStyle(
-                                                    18,
-                                                    glb.main_foreground_header,
-                                                    true))
-                                            : finalItems[index]);
+                                        : finalItems[index];
                                   }),
                             )
                 ],
@@ -202,7 +186,8 @@ class _SearchFoodViewState extends State<SearchFoodView> {
     if (response.statusCode == 200) {
       initialItems = json.decode(response.body.toString())['foods'];
       List<Widget> temp = [];
-      temp.add(Text(""));
+      temp.add(Text(" Results (per 100 g):",
+          style: getAppTextStyle(18, Colors.black, true)));
       temp.add(SizedBox(height: 20));
 
       //loop
@@ -232,12 +217,12 @@ class _SearchFoodViewState extends State<SearchFoodView> {
               SizedBox(height: 40),
               Icon(
                 Icons.error_rounded,
-                color: glb.main_foreground_dimmer,
+                color: Colors.grey[600],
               ),
               SizedBox(height: 15),
               Text(
                 "No results found.",
-                style: getAppTextStyle(14, glb.main_foreground_dimmer, false),
+                style: getAppTextStyle(14, Colors.grey[600], false),
               ),
             ],
           ),

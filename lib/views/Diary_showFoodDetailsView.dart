@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:sprightly/widgets/globals.dart' as glb;
 
-class ShowFoodDetailsView extends StatelessWidget {
+class ShowFoodDetailsView extends StatefulWidget {
   int currItemIndex;
   List<dynamic> initialItems;
   String currItemName;
@@ -16,34 +17,43 @@ class ShowFoodDetailsView extends StatelessWidget {
     nutrientList = currItemMap['foodNutrients'];
     nutrientMap = {
       "Calories: " +
-              nutrientList[3]['value'].toString() + " "+
+              nutrientList[3]['value'].toString() +
+              " " +
               nutrientList[3]['unitName'].toString().toLowerCase():
           nutrientList[3]['value'] + 0.0,
       "Carbs: " +
-              nutrientList[2]['value'].toString() + " "+
+              nutrientList[2]['value'].toString() +
+              " " +
               nutrientList[2]['unitName'].toString().toLowerCase():
           nutrientList[2]['value'] + 0.0,
       "Fat: " +
-              nutrientList[1]['value'].toString() + " "+
+              nutrientList[1]['value'].toString() +
+              " " +
               nutrientList[1]['unitName'].toString().toLowerCase():
           nutrientList[1]['value'] + 0.0,
       "Protein: " +
-              nutrientList[0]['value'].toString() + " "+
+              nutrientList[0]['value'].toString() +
+              " " +
               nutrientList[0]['unitName'].toString().toLowerCase():
           nutrientList[0]['value'] + 0.0,
     };
   }
 
   @override
+  _ShowFoodDetailsViewState createState() => _ShowFoodDetailsViewState();
+}
+
+class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
+  @override
   Widget build(BuildContext context) {
     return Container(
         child: Scaffold(
-            backgroundColor: Colors.grey[350],
-            appBar: AppBar(
-              backgroundColor: Colors.orange[400],
-              title: Image.asset('images/sprightly_logo.png', height: 40),
-              centerTitle: true,
-            ),
+            backgroundColor: glb.main_scaffold_background,
+            appBar: glb.appBar_Sprightly(() {
+              setState(() {
+                glb.switchTheme();
+              });
+            }),
             body: SafeArea(
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
@@ -60,9 +70,9 @@ class ShowFoodDetailsView extends StatelessWidget {
                         margin: EdgeInsets.only(bottom: 10),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: Colors.orange[50]),
-                        child: Text(currItemName,
-                            style: getAppTextStyle(18, Colors.grey[800], true)),
+                            color: glb.main_secondary),
+                        child: Text(widget.currItemName,
+                            style: getAppTextStyle(18, Colors.black, true)),
                       ),
                       Container(
                         padding:
@@ -70,16 +80,16 @@ class ShowFoodDetailsView extends StatelessWidget {
                         margin: EdgeInsets.only(bottom: 8),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: Colors.white),
+                            color: glb.main_background),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Serving",
                                 style:
-                                    getAppTextStyle(16, Colors.black, false)),
+                                    getAppTextStyle(16, glb.main_foreground_header, false)),
                             Text("100 g",
                                 style: getAppTextStyle(
-                                    16, Colors.grey[600], false))
+                                    16, glb.main_foreground_dimmer, false))
                           ],
                         ),
                       ),
@@ -89,9 +99,9 @@ class ShowFoodDetailsView extends StatelessWidget {
                         margin: EdgeInsets.only(bottom: 8),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: Colors.white),
+                            color: glb.main_background),
                         child: PieChart(
-                          dataMap: nutrientMap,
+                          dataMap: widget.nutrientMap,
                           chartType: ChartType.ring,
                           animationDuration: Duration(milliseconds: 2000),
                           initialAngleInDegree: 0,
@@ -106,7 +116,7 @@ class ShowFoodDetailsView extends StatelessWidget {
                               ChartValuesOptions(showChartValues: false),
                           legendOptions: LegendOptions(
                               legendTextStyle:
-                                  getAppTextStyle(14, Colors.grey[600], false)),
+                                  getAppTextStyle(14, glb.main_foreground_dimmer, false)),
                         ),
                       ),
                       makeNutrientListColumn(context)
@@ -119,24 +129,25 @@ class ShowFoodDetailsView extends StatelessWidget {
 
   Column makeNutrientListColumn(BuildContext context) {
     List<Container> ls = [];
-    nutrientList.forEach((element) {
+    widget.nutrientList.forEach((element) {
       ls.add(Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         margin: EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5), color: Colors.white),
+            borderRadius: BorderRadius.circular(5), color: glb.main_background),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
               width: MediaQuery.of(context).size.width / 1.5,
               child: Text(capitalizeEachWord(element['nutrientName'], false),
-                  style: getAppTextStyle(16, Colors.black, false)),
+                  style: getAppTextStyle(16, glb.main_foreground_header, false)),
             ),
             Text(
-                element['value'].toString() + " "+
+                element['value'].toString() +
+                    " " +
                     element['unitName'].toString().toLowerCase(),
-                style: getAppTextStyle(16, Colors.grey[600], false))
+                style: getAppTextStyle(16, glb.main_foreground_dimmer, false))
           ],
         ),
       ));

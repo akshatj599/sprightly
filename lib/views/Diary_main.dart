@@ -3,6 +3,7 @@ import 'package:sprightly/widgets/caloriesRemaining.dart';
 import 'package:date_format/date_format.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/widgets/DiaryMealCard.dart';
+import 'package:sprightly/widgets/globals.dart' as glb;
 
 class Diary extends StatefulWidget {
   @override
@@ -40,7 +41,7 @@ class _DiaryState extends State<Diary> {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(15)),
-            color: Colors.white,
+            color: glb.main_background,
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.2),
@@ -64,7 +65,7 @@ class _DiaryState extends State<Diary> {
                   },
                   child: Text("<",
                       style: getAppTextStyle(16, Colors.red[400], false))),
-              Text(dt, style: getAppTextStyle(16, Colors.black, false)),
+              Text(dt, style: getAppTextStyle(16, glb.main_foreground_header, false)),
               TextButton(
                   onPressed: () {
                     setState(() {
@@ -77,16 +78,17 @@ class _DiaryState extends State<Diary> {
           ),
         ),
         CaloriesRemaining(),
+        SizedBox(height: 10),
         Expanded(
           child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Column(
               children: [
-                getDiaryMealCard("Breakfast", breakfastCalories),
-                getDiaryMealCard("Lunch", lunchCalories),
-                getDiaryMealCard("Dinner", dinnerCalories),
-                getDiaryMealCard("Snack", snacksCalories),
-                getDiaryMealCard("Exercise", exerciseCalories),
+                getDiaryFoodMealCard("Breakfast", breakfastCalories),
+                getDiaryFoodMealCard("Lunch", lunchCalories),
+                getDiaryFoodMealCard("Dinner", dinnerCalories),
+                getDiaryFoodMealCard("Snack", snacksCalories),
+                getDiaryExerciseMealCard(exerciseCalories),
               ],
             ),
           ),

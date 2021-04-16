@@ -1,0 +1,12 @@
+{
+    "workbench.colorCustomizations": {
+    
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.tokenColorCustomizations": null,
+    "workbench.colorTheme": "Quiet Light",
+    "editor.semanticTokenColorCustomizations": null,
+    "dart.flutterCustomEmulators": [
+    
+    ]
+}

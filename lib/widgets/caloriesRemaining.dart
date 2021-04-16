@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sprightly/views/ExpandedCaloriesView.dart';
+import 'package:sprightly/views/Sprightly.dart';
 import 'package:sprightly/widgets/widgets.dart';
+import 'globals.dart' as glb;
 
-class CaloriesRemaining extends StatelessWidget {
+class CaloriesRemaining extends StatefulWidget {
   int goal;
   int food;
   int exercise;
@@ -17,15 +19,37 @@ class CaloriesRemaining extends StatelessWidget {
   }
 
   @override
+  _CaloriesRemainingState createState() => _CaloriesRemainingState();
+}
+
+class _CaloriesRemainingState extends State<CaloriesRemaining> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ExpandedCaloriesView()));
+      onTap: () async {
+        await Navigator.of(context)
+            .push(PageRouteBuilder(
+                pageBuilder: (context, animation, anotherAnimation) {
+                  return ExpandedCaloriesView();
+                },
+                transitionDuration: Duration(milliseconds: 300),
+                transitionsBuilder:
+                    (context, animation, anotherAnimation, child) {
+                  return SlideTransition(
+                    position:
+                        Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                            .animate(animation),
+                    child: child,
+                  );
+                }))
+            .then((value) {
+          glb.bnb.onTap(glb.bnb.currentIndex);
+        });
       },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
-          color: Colors.white,
+          color: glb.main_background,
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.2),
@@ -38,7 +62,7 @@ class CaloriesRemaining extends StatelessWidget {
         // color: Colors.white,
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+        margin: EdgeInsets.fromLTRB(5, 10, 5, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,7 +70,7 @@ class CaloriesRemaining extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 "Calories Remaining",
-                style: getAppTextStyle(18, Colors.grey[800], true),
+                style: getAppTextStyle(18, glb.main_foreground_header, true),
               ),
             ),
             SizedBox(
@@ -56,33 +80,46 @@ class CaloriesRemaining extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(children: [
-                  Text(goal.toString(),
-                      style: getAppTextStyle(16, Colors.black, false)),
+                  Text(widget.goal.toString(),
+                      style: getAppTextStyle(
+                          16, glb.main_foreground_header, false)),
                   Text("Goal",
-                      style: getAppTextStyle(14, Colors.grey[700], false))
+                      style: getAppTextStyle(
+                          14, glb.main_foreground_dimmer, false))
                 ]),
-                Text("-", style: getAppTextStyle(16, Colors.black, false)),
+                Text("-",
+                    style:
+                        getAppTextStyle(16, glb.main_foreground_header, false)),
                 Column(children: [
-                  Text(food.toString(),
-                      style: getAppTextStyle(16, Colors.black, false)),
+                  Text(widget.food.toString(),
+                      style: getAppTextStyle(
+                          16, glb.main_foreground_header, false)),
                   Text("Food",
-                      style: getAppTextStyle(14, Colors.grey[700], false))
+                      style: getAppTextStyle(
+                          14, glb.main_foreground_dimmer, false))
                 ]),
-                Text("+", style: getAppTextStyle(16, Colors.black, false)),
+                Text("+",
+                    style:
+                        getAppTextStyle(16, glb.main_foreground_header, false)),
                 Column(children: [
-                  Text(exercise.toString(),
-                      style: getAppTextStyle(16, Colors.black, false)),
+                  Text(widget.exercise.toString(),
+                      style: getAppTextStyle(
+                          16, glb.main_foreground_header, false)),
                   Text("Exercise",
-                      style: getAppTextStyle(14, Colors.grey[700], false))
+                      style: getAppTextStyle(
+                          14, glb.main_foreground_dimmer, false))
                 ]),
-                Text("=", style: getAppTextStyle(16, Colors.black, false)),
+                Text("=",
+                    style:
+                        getAppTextStyle(16, glb.main_foreground_header, false)),
                 Column(children: [
                   Text(
-                    remaining.toString(),
+                    widget.remaining.toString(),
                     style: getAppTextStyle(16, Colors.green, false),
                   ),
                   Text("Remaining",
-                      style: getAppTextStyle(14, Colors.grey[700], false))
+                      style: getAppTextStyle(
+                          14, glb.main_foreground_dimmer, false))
                 ])
               ],
             )

@@ -7,6 +7,8 @@ import 'package:sprightly/Home_BMI/screens/results_page.dart';
 import 'package:sprightly/Home_BMI/components/bottom_button.dart';
 import 'package:sprightly/Home_BMI/components/round_icon_button.dart';
 import 'package:sprightly/Home_BMI/calculator_brain.dart';
+import 'package:sprightly/widgets/widgets.dart';
+import 'package:sprightly/widgets/globals.dart' as glb;
 
 enum Gender {
   male,
@@ -32,17 +34,15 @@ class _InputPageState extends State<InputPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            SizedBox(height: 10),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               margin: EdgeInsets.symmetric(horizontal: 5),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10)),
+                  color: glb.main_background, borderRadius: BorderRadius.circular(10)),
               child: Text(
                 "Calculate Your BMI",
-                style: kLargeButtonTextStyle,
+                style: getAppTextStyle(18, glb.main_foreground_header, true),
               ),
             ),
             SizedBox(height: 10),
@@ -56,11 +56,12 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                     colour: selectedGender == Gender.male
-                        ? kMaleActiveCardColour
-                        : kInactiveCardColour,
+                        ? Color(0xFF82e0ff)
+                        : glb.main_background,
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.mars,
                       label: 'MALE',
+                      iconColor: selectedGender == Gender.male ? Colors.grey[800]: glb.main_foreground_header,
                     ),
                   ),
                 ),
@@ -72,39 +73,43 @@ class _InputPageState extends State<InputPage> {
                       });
                     },
                     colour: selectedGender == Gender.female
-                        ? kFemaleActiveCardColour
-                        : kInactiveCardColour,
-                    cardChild: IconContent(
+                        ? Color(0xFFfab1f5)
+                        : glb.main_background,
+                    cardChild: IconContent(                    
                       icon: FontAwesomeIcons.venus,
                       label: 'FEMALE',
+                      iconColor: selectedGender == Gender.female ? Colors.grey[800]: glb.main_foreground_header,
                     ),
                   ),
                 ),
               ],
             ),
             ReusableCard(
-              colour: kGeneralbackground,
+              colour: glb.main_background,
               cardChild: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     'HEIGHT',
-                    style: kLabelTextStyle,
+                    style: getAppTextStyle(14, glb.main_foreground_header, false),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: <Widget>[
-                      Text(
-                        height.toString(),
-                        style: kNumberTextStyle,
-                      ),
-                      Text(
-                        ' cm',
-                        style: kLabelTextStyle,
-                      )
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: <Widget>[
+                        Text(
+                          height.toString(),
+                          style: getAppTextStyle(25, glb.main_foreground_header, true),
+                        ),
+                        Text(
+                          ' cm',
+                          style: getAppTextStyle(14, glb.main_foreground_header, false),
+                        )
+                      ],
+                    ),
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
@@ -135,13 +140,13 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: ReusableCard(
-                    colour: kGeneralbackground,
+                    colour: glb.main_background,
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
                           'WEIGHT',
-                          style: kLabelTextStyle,
+                          style: getAppTextStyle(14, glb.main_foreground_header, false),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5),
@@ -152,11 +157,11 @@ class _InputPageState extends State<InputPage> {
                             children: [
                               Text(
                                 weight.toString(),
-                                style: kNumberTextStyle,
+                                style: getAppTextStyle(25, glb.main_foreground_header, true),
                               ),
                               Text(
                                 " kg",
-                                style: kLabelTextStyle,
+                                style: getAppTextStyle(14, glb.main_foreground_header, false),
                               ),
                             ],
                           ),
@@ -190,13 +195,13 @@ class _InputPageState extends State<InputPage> {
                 ),
                 Expanded(
                   child: ReusableCard(
-                    colour: kGeneralbackground,
+                    colour: glb.main_background,
                     cardChild: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
                           'AGE',
-                          style: kLabelTextStyle,
+                          style: getAppTextStyle(14, glb.main_foreground_header, false),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5),
@@ -207,11 +212,11 @@ class _InputPageState extends State<InputPage> {
                             children: [
                               Text(
                                 age.toString(),
-                                style: kNumberTextStyle,
+                                style: getAppTextStyle(25, glb.main_foreground_header, true),
                               ),
                               Text(
                                 " yr",
-                                style: kLabelTextStyle,
+                                style: getAppTextStyle(14, glb.main_foreground_header, false),
                               )
                             ],
                           ),
@@ -249,20 +254,44 @@ class _InputPageState extends State<InputPage> {
             ),
             BottomButton(
               buttonTitle: 'CALCULATE',
-              onTap: () {
+              onTap: () async {
                 CalculatorBrain calc =
                     CalculatorBrain(height: height, weight: weight);
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResultsPage(
-                      bmiResult: calc.calculateBMI(),
-                      resultText: calc.getResult(),
-                      interpretation: calc.getInterpretation(),
-                    ),
-                  ),
-                );
+                await Navigator.of(context)
+                    .push(PageRouteBuilder(
+                        pageBuilder: (context, animation, anotherAnimation) {
+                          return ResultsPage(
+                            bmiResult: calc.calculateBMI(),
+                            resultText: calc.getResult(),
+                            interpretation: calc.getInterpretation(),
+                          );
+                        },
+                        transitionDuration: Duration(milliseconds: 300),
+                        transitionsBuilder:
+                            (context, animation, anotherAnimation, child) {
+                          return SlideTransition(
+                            position: Tween(
+                                    begin: Offset(1.0, 0.0),
+                                    end: Offset(0.0, 0.0))
+                                .animate(animation),
+                            child: child,
+                          );
+                        }))
+                    .then((value) {
+                  glb.bnb.onTap(glb.bnb.currentIndex);
+                });
+
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => ResultsPage(
+                //       bmiResult: calc.calculateBMI(),
+                //       resultText: calc.getResult(),
+                //       interpretation: calc.getInterpretation(),
+                //     ),
+                //   ),
+                // );
               },
             ),
           ],

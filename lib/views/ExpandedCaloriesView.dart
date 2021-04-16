@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:date_format/date_format.dart';
 import 'package:pie_chart/pie_chart.dart';
+import 'package:sprightly/widgets/globals.dart' as glb;
 
 class ExpandedCaloriesView extends StatefulWidget {
   @override
@@ -27,9 +28,10 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
     lunchCalories = 300;
     dinnerCalories = 100;
     snackCalories = 50;
-    totalCalories = breakFastCalories+lunchCalories+dinnerCalories+snackCalories;
-    goal=1500;
-    remainingCalories=goal-totalCalories;
+    totalCalories =
+        breakFastCalories + lunchCalories + dinnerCalories + snackCalories;
+    goal = 1500;
+    remainingCalories = goal - totalCalories;
     mealMap = {
       'Breakfast': breakFastCalories,
       "Lunch": lunchCalories,
@@ -51,25 +53,51 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
       dt = formatDate(temp, [D, ', ', M, ' ', dd, ' \'', yy]);
   }
 
+  Container makeCard(
+      String title, String value, bool flag_green, bool flag_bold) {
+    return Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        margin: EdgeInsets.fromLTRB(5, 0, 5, 10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: glb.main_background),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: getAppTextStyle(16, glb.main_foreground_header, false),
+            ),
+            Text(
+              value + " kcal",
+              style: getAppTextStyle(
+                  16,
+                  flag_green ? Colors.green : glb.main_foreground_dimmer,
+                  flag_bold ? true : false),
+            ),
+          ],
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     getMealCaloriesFromFirebase();
     changeDate();
     return Container(
         child: Scaffold(
-      backgroundColor: Colors.grey[350],
-      appBar: AppBar(
-        backgroundColor: Colors.orange[400],
-        title: Image.asset('images/sprightly_logo.png', height: 40),
-        centerTitle: true,
-      ),
+      backgroundColor: glb.main_scaffold_background,
+      appBar: glb.appBar_Sprightly(() {
+          setState(() {
+            glb.switchTheme();
+          });
+        }),
       body: SafeArea(
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: Colors.white,
+                color: glb.main_background,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
@@ -93,7 +121,9 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
                       },
                       child: Text("<",
                           style: getAppTextStyle(16, Colors.red[400], false))),
-                  Text(dt, style: getAppTextStyle(16, Colors.black, false)),
+                  Text(dt,
+                      style: getAppTextStyle(
+                          16, glb.main_foreground_header, false)),
                   TextButton(
                       onPressed: () {
                         setState(() {
@@ -109,7 +139,8 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: Colors.white),
+                  borderRadius: BorderRadius.circular(10),
+                  color: glb.main_background),
               child: PieChart(
                 dataMap: mealMap,
                 animationDuration: Duration(milliseconds: 2000),
@@ -122,113 +153,33 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
                 ],
                 chartRadius: MediaQuery.of(context).size.width / 2,
                 chartValuesOptions: ChartValuesOptions(
-                    showChartValues: true, showChartValuesInPercentage: true,
-                chartValueStyle: getAppTextStyle(14, Colors.black, false),
-                showChartValueBackground: false),
+                    showChartValues: true,
+                    showChartValuesInPercentage: true,
+                    chartValueStyle: getAppTextStyle(14, Colors.black, false),
+                    showChartValueBackground: false),
                 legendOptions: LegendOptions(
                   showLegends: true,
                   legendPosition: LegendPosition.right,
-                  legendTextStyle: getAppTextStyle(14, Colors.black, false),
+                  legendTextStyle:
+                      getAppTextStyle(14, glb.main_foreground_header, false),
                 ),
               ),
             ),
-
             Expanded(
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.fromLTRB(5, 0, 5, 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Breakfast", style: getAppTextStyle(16, Colors.black, false),),
-                            Text(breakFastCalories.toString()+" kcal", style: getAppTextStyle(16, Colors.grey[700], false),),
-                          ],
-                        )
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.fromLTRB(5, 0, 5, 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Lunch", style: getAppTextStyle(16, Colors.black, false),),
-                            Text(lunchCalories.toString()+" kcal", style: getAppTextStyle(16, Colors.grey[700], false),),
-                          ],
-                        )
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.fromLTRB(5, 0, 5, 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Dinner", style: getAppTextStyle(16, Colors.black, false),),
-                            Text(dinnerCalories.toString()+" kcal", style: getAppTextStyle(16, Colors.grey[700], false),),
-                          ],
-                        )
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.fromLTRB(5, 0, 5, 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Snacks", style: getAppTextStyle(16, Colors.black, false),),
-                            Text(snackCalories.toString()+" kcal", style: getAppTextStyle(16, Colors.grey[700], false),),
-                          ],
-                        )
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.fromLTRB(5, 0, 5, 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Total Calories", style: getAppTextStyle(16, Colors.black, false),),
-                            Text(totalCalories.toString()+" kcal", style: getAppTextStyle(16, Colors.grey[700], false),),
-                          ],
-                        )
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.fromLTRB(5, 0, 5, 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Goal", style: getAppTextStyle(16, Colors.black, false),),
-                            Text(goal.toString()+" kcal", style: getAppTextStyle(16, Colors.grey[700], true),),
-                          ],
-                        )
-                    ),
-                    Container(
-                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.fromLTRB(5, 0, 5, 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10), color: Colors.white),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Calories Remaining", style: getAppTextStyle(16, Colors.black, false),),
-                            Text(remainingCalories.toString()+" kcal", style: getAppTextStyle(16, Colors.green, true),),
-                          ],
-                        )
-                    ),
+                    makeCard("Breakfast", breakFastCalories.toString(), false,
+                        false),
+                    makeCard("Lunch", lunchCalories.toString(), false, false),
+                    makeCard("Dinner", dinnerCalories.toString(), false, false),
+                    makeCard("Snacks", snackCalories.toString(), false, false),
+                    makeCard("Total Calories", totalCalories.toString(), false,
+                        false),
+                    makeCard("Goal", goal.toString(), false, true),
+                    makeCard("Calories Remaining", remainingCalories.toString(),
+                        true, true),
                   ],
                 ),
               ),
