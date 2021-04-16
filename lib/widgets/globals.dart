@@ -23,7 +23,7 @@ void switchTheme() {
     main_foreground_header = Colors.white.withOpacity(0.8);
     main_foreground_dimmer = Colors.white.withOpacity(0.6);
     main_scaffold_background = Colors.grey[500];
-    main_appBar = Colors.purple[800];
+    main_appBar = Colors.purple[900];
     main_secondary = Colors.deepPurple[50];
   } else {
     //light colors
