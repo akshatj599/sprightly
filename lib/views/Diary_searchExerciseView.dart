@@ -27,6 +27,7 @@ class _SearchExerciseViewState extends State<SearchExerciseView> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+          resizeToAvoidBottomInset: false,
           backgroundColor: glb.main_background,
           appBar: glb.appBar_Sprightly(() {
             setState(() {
@@ -95,107 +96,34 @@ class _SearchExerciseViewState extends State<SearchExerciseView> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 12.0, horizontal: 20),
-                        child: Text("Add to your diary", style: getAppTextStyle(16, Colors.white, false),),
+                        child: Text(
+                          "Add to your diary",
+                          style: getAppTextStyle(16, Colors.white, false),
+                        ),
                       ),
                     ),
                     SizedBox(height: 20),
-                    (isLoading == true)
-                        ? Center(
-                            child: Column(children: [
-                              SizedBox(height: 40),
-                              CircularProgressIndicator()
-                            ]),
-                          )
-                        : (initialState == true)
-                            ? Center(
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 40),
-                                    Icon(
-                                      Icons.add_circle_rounded,
-                                      color: glb.main_foreground_dimmer,
-                                    ),
-                                    SizedBox(height: 15),
-                                    Text(
-                                      "Which exercise made those calories burn?",
-                                      style: getAppTextStyle(14,
-                                          glb.main_foreground_dimmer, false),
-                                    ),
-                                    SizedBox(height: 2),
-                                    Text("Add its details here.",
-                                        style: getAppTextStyle(14,
-                                            glb.main_foreground_dimmer, false))
-                                  ],
-                                ),
-                              )
-                            : Expanded(
-                                child: ListView.builder(
-                                    physics: BouncingScrollPhysics(),
-                                    itemCount: finalItems.length,
-                                    itemBuilder: (context, index) {
-                                      return (index != 0 && index != 1)
-                                          ? GestureDetector(
-                                              onTap: () async {
-                                                await Navigator.of(context)
-                                                    .push(PageRouteBuilder(
-                                                        pageBuilder: (context,
-                                                            animation,
-                                                            anotherAnimation) {
-                                                          return ShowFoodDetailsView(
-                                                              index - 2,
-                                                              initialItems);
-                                                        },
-                                                        transitionDuration:
-                                                            Duration(
-                                                                milliseconds:
-                                                                    300),
-                                                        transitionsBuilder:
-                                                            (context,
-                                                                animation,
-                                                                anotherAnimation,
-                                                                child) {
-                                                          return SlideTransition(
-                                                            position: Tween(
-                                                                    begin:
-                                                                        Offset(
-                                                                            1.0,
-                                                                            0.0),
-                                                                    end: Offset(
-                                                                        0.0,
-                                                                        0.0))
-                                                                .animate(
-                                                                    animation),
-                                                            child: child,
-                                                          );
-                                                        }))
-                                                    .then((value) {
-                                                  glb.bnb.onTap(
-                                                      glb.bnb.currentIndex);
-                                                });
-                                              },
-                                              child: Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 10),
-                                                margin: EdgeInsets.fromLTRB(
-                                                    0, 0, 0, 8),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    color: glb.main_secondary),
-                                                child: finalItems[index],
-                                              ),
-                                            )
-                                          : (index == 0
-                                              ? Text(" Results (per 100 g):",
-                                                  style: getAppTextStyle(
-                                                      18,
-                                                      glb.main_foreground_header,
-                                                      true))
-                                              : finalItems[index]);
-                                    }),
-                              )
+                    Center(
+                      child: Column(
+                        children: [
+                          SizedBox(height: 40),
+                          Icon(
+                            Icons.add_circle_rounded,
+                            color: glb.main_foreground_dimmer,
+                          ),
+                          SizedBox(height: 15),
+                          Text(
+                            "Which exercise made those calories burn?",
+                            style: getAppTextStyle(
+                                14, glb.main_foreground_dimmer, false),
+                          ),
+                          SizedBox(height: 2),
+                          Text("Add its details here.",
+                              style: getAppTextStyle(
+                                  14, glb.main_foreground_dimmer, false))
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
