@@ -58,14 +58,16 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                       children: [
                         Expanded(
                           child: TextField(
-                              controller: searchEditingController,
-                              decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.grey[200],
-                                  border: InputBorder.none,
-                                  hintText: 'Search an item',
-                                  hintStyle: getAppTextStyle(
-                                      16, Colors.grey[700], false))),
+                            controller: searchEditingController,
+                            decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.grey[200],
+                              border: InputBorder.none,
+                              hintText: 'Search an item',
+                              hintStyle:
+                                  getAppTextStyle(16, Colors.grey[700], false),
+                            ),
+                          ),
                         ),
                         SizedBox(width: 10),
                         ElevatedButton(
@@ -208,7 +210,6 @@ class _SearchFoodViewState extends State<SearchFoodView> {
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
-        
         body: jsonEncode(
             <String, String>{'query': searchItem, 'pageSize': '20'}));
 

@@ -63,7 +63,7 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 15),
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       FocusScope.of(context).requestFocus(new FocusNode());
                     },
                     child: Column(
@@ -146,13 +146,13 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                                     width:
                                         MediaQuery.of(context).size.width / 4,
                                     child: TextField(
-
                                       controller: quantityController,
-                                      decoration: InputDecoration(                                        
+                                      decoration: InputDecoration(
                                           border: InputBorder.none,
                                           filled: true,
                                           fillColor: Colors.grey[200],
-                                          contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+                                          contentPadding:
+                                              EdgeInsets.fromLTRB(10, 5, 10, 0),
                                           hintText: 'Weight',
                                           hintStyle: getAppTextStyle(
                                               16, Colors.grey[700], false),

@@ -3,6 +3,7 @@ import 'package:sprightly/widgets/chart.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:sprightly/Home_BMI/components/bottom_button.dart';
 
 class AccountView extends StatefulWidget {
   @override
@@ -104,6 +105,10 @@ class _AccountViewState extends State<AccountView> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  BottomButton(buttonTitle: 'Sign Out', onTap: () {}),
                 ],
               ),
             ),

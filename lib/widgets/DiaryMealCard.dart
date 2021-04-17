@@ -39,22 +39,24 @@ Column getDiaryFoodMealCard(String mealName, int calories) {
       ),
       GestureDetector(
         onTap: () async {
-          await Navigator.of(glb.context).push(PageRouteBuilder(
-              pageBuilder: (context, animation, anotherAnimation) {
-                return SearchFoodView(mealName);
-              },
-              transitionDuration: Duration(milliseconds: 300),
-              transitionsBuilder:
-                  (context, animation, anotherAnimation, child) {
-                return SlideTransition(
-                  position:
-                      Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
-                          .animate(animation),
-                  child: child,
-                );
-              })).then((value){
-                glb.bnb.onTap(glb.bnb.currentIndex);
-              });
+          await Navigator.of(glb.context)
+              .push(PageRouteBuilder(
+                  pageBuilder: (context, animation, anotherAnimation) {
+                    return SearchFoodView(mealName);
+                  },
+                  transitionDuration: Duration(milliseconds: 300),
+                  transitionsBuilder:
+                      (context, animation, anotherAnimation, child) {
+                    return SlideTransition(
+                      position:
+                          Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                              .animate(animation),
+                      child: child,
+                    );
+                  }))
+              .then((value) {
+            glb.bnb.onTap(glb.bnb.currentIndex);
+          });
         },
         child: Container(
           width: double.infinity,
@@ -110,26 +112,30 @@ Column getDiaryExerciseMealCard(int calories) {
               style: getAppTextStyle(16, glb.main_foreground_header, false),
             ),
             Text(calories.toString(),
-                style: getAppTextStyle(16, glb.main_foreground_header,false))
+                style: getAppTextStyle(16, glb.main_foreground_header, false))
           ],
         ),
       ),
       GestureDetector(
-        onTap: () {
-          Navigator.of(glb.context).push(PageRouteBuilder(
-              pageBuilder: (context, animation, anotherAnimation) {
-                return SearchExerciseView();
-              },
-              transitionDuration: Duration(milliseconds: 300),
-              transitionsBuilder:
-                  (context, animation, anotherAnimation, child) {
-                return SlideTransition(
-                  position:
-                      Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
-                          .animate(animation),
-                  child: child,
-                );
-              }));
+        onTap: () async {
+          await Navigator.of(glb.context)
+              .push(PageRouteBuilder(
+                  pageBuilder: (context, animation, anotherAnimation) {
+                    return SearchExerciseView();
+                  },
+                  transitionDuration: Duration(milliseconds: 300),
+                  transitionsBuilder:
+                      (context, animation, anotherAnimation, child) {
+                    return SlideTransition(
+                      position:
+                          Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                              .animate(animation),
+                      child: child,
+                    );
+                  }))
+              .then((value) {
+            glb.bnb.onTap(glb.bnb.currentIndex);
+          });
         },
         child: Container(
           width: double.infinity,
