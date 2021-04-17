@@ -25,22 +25,22 @@ class _SearchExerciseViewState extends State<SearchExerciseView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: glb.main_background,
-          appBar: glb.appBar_Sprightly(() {
-            setState(() {
-              glb.switchTheme();
-            });
-          }),
-          body: SafeArea(
-            child: Container(
-              padding: EdgeInsets.all(20),
-              child: GestureDetector(
-                onTap: () {
-                  FocusScope.of(context).requestFocus(new FocusNode());
-                },
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
+      child: Container(
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            backgroundColor: glb.main_background,
+            appBar: glb.appBar_Sprightly(() {
+              setState(() {
+                glb.switchTheme();
+              });
+            }),
+            body: SafeArea(
+              child: Container(
+                padding: EdgeInsets.all(20),
                 child: Column(
                   children: [
                     Center(
@@ -127,10 +127,8 @@ class _SearchExerciseViewState extends State<SearchExerciseView> {
                   ],
                 ),
               ),
-            ),
-          )),
+            )),
+      ),
     );
   }
 }
-
-//API Key:  sqLi8eWjX2iVjNW1X2GZC3fnJJqoKLbVsiCdYI5F

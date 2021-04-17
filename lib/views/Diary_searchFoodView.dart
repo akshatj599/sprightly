@@ -28,21 +28,21 @@ class _SearchFoodViewState extends State<SearchFoodView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Scaffold(
-          backgroundColor: glb.main_background,
-          appBar: glb.appBar_Sprightly(() {
-            setState(() {
-              glb.switchTheme();
-            });
-          }),
-          body: SafeArea(
-            child: Container(
-              padding: EdgeInsets.all(20),
-              child: GestureDetector(
-                onTap: () {
-                  FocusScope.of(context).requestFocus(new FocusNode());
-                },
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
+      child: Container(
+        child: Scaffold(
+            backgroundColor: glb.main_background,
+            appBar: glb.appBar_Sprightly(() {
+              setState(() {
+                glb.switchTheme();
+              });
+            }),
+            body: SafeArea(
+              child: Container(
+                padding: EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -198,8 +198,8 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                   ],
                 ),
               ),
-            ),
-          )),
+            )),
+      ),
     );
   }
 

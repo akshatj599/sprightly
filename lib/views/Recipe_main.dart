@@ -69,7 +69,6 @@ class _RecipeState extends State<Recipe> {
           borderRadius: BorderRadius.all(Radius.circular(10)),
           color: glb.main_background),
       width: 150,
-      height: 230,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

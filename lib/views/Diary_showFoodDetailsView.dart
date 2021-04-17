@@ -48,24 +48,24 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Scaffold(
-            backgroundColor: glb.main_scaffold_background,
-            appBar: glb.appBar_Sprightly(() {
-              setState(() {
-                glb.switchTheme();
-              });
-            }),
-            body: SafeArea(
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12.0, vertical: 15),
-                  child: GestureDetector(
-                    onTap: () {
-                      FocusScope.of(context).requestFocus(new FocusNode());
-                    },
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
+      child: Container(
+          child: Scaffold(
+              backgroundColor: glb.main_scaffold_background,
+              appBar: glb.appBar_Sprightly(() {
+                setState(() {
+                  glb.switchTheme();
+                });
+              }),
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  physics: BouncingScrollPhysics(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 15),
                     child: Column(
                       children: [
                         Container(
@@ -180,7 +180,7 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                                 onPressed: () {},
                                 child: Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0, vertical: 12.0),
+                                        horizontal: 8.0, vertical: 10.0),
                                     child: Text("Add",
                                         style: getAppTextStyle(
                                             16, Colors.white, false))),
@@ -193,8 +193,8 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                     ),
                   ),
                 ),
-              ),
-            )));
+              ))),
+    );
   }
 
   Column makeNutrientListColumn(BuildContext context) {
