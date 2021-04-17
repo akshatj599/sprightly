@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/views/Account_main.dart';
+import 'package:sprightly/views/Recipe_main.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/views/Home_main.dart';
 import 'package:sprightly/views/Diary_main.dart';
@@ -34,7 +35,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
     } else if (_navigationBarCurrIndex == 1) {
       newPage = Diary();
     } else if (_navigationBarCurrIndex == 2) {
-      newPage = Text("Recipes 2");
+      newPage = Recipe();
     } else if (_navigationBarCurrIndex == 3) {
       newPage = Center(
           child: Column(
@@ -63,46 +64,43 @@ class _SprightlyHomeState extends State<SprightlyHome> {
   @override
   Widget build(BuildContext context) {
     glb.bnb = BottomNavigationBar(
-          selectedLabelStyle: getAppTextStyle(12, Colors.orange[400], true),
-          unselectedLabelStyle: getAppTextStyle(12, Colors.white, false),
-          currentIndex: _navigationBarCurrIndex,
-          onTap: (index) {
-            setState(() {
-              _navigationBarCurrIndex = index;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color(0xff232d37),
-          selectedItemColor: Colors.orange[400],
-          unselectedItemColor: Colors.white,
-          iconSize: 25,
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined), label: "Home"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.book_outlined), label: "Diary"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.emoji_food_beverage_outlined),
-                label: "Recipes"),
-            BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: "Plans"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.account_box_outlined), label: "Account"),
-          ],
-        );
+      selectedLabelStyle: getAppTextStyle(12, Colors.orange[400], true),
+      unselectedLabelStyle: getAppTextStyle(12, Colors.white, false),
+      currentIndex: _navigationBarCurrIndex,
+      onTap: (index) {
+        setState(() {
+          _navigationBarCurrIndex = index;
+        });
+      },
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Color(0xff232d37),
+      selectedItemColor: Colors.orange[400],
+      unselectedItemColor: Colors.white,
+      iconSize: 25,
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.book_outlined), label: "Diary"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.emoji_food_beverage_outlined), label: "Recipes"),
+        BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: "Plans"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.account_box_outlined), label: "Account"),
+      ],
+    );
 
     var container = Container(
       child: Scaffold(
-        backgroundColor: glb.main_scaffold_background,
-        appBar: glb.appBar_Sprightly(() {
-          setState(() {
-            glb.switchTheme();
-          });
-        }),
-        body: SafeArea(
-          child: changeView(),
-        ),
-        bottomNavigationBar: glb.bnb
-      ),
+          backgroundColor: glb.main_scaffold_background,
+          appBar: glb.appBar_Sprightly(() {
+            setState(() {
+              glb.switchTheme();
+            });
+          }),
+          body: SafeArea(
+            child: changeView(),
+          ),
+          bottomNavigationBar: glb.bnb),
     );
     glb.context = context;
     return container;

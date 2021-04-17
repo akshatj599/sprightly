@@ -39,150 +39,162 @@ class _SearchFoodViewState extends State<SearchFoodView> {
           body: SafeArea(
             child: Container(
               padding: EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: Text("Add A " + widget.mealType + " Item",
-                        style: getAppTextStyle(
-                            20, glb.main_foreground_header, true)),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                            controller: searchEditingController,
-                            decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.grey[100],
-                                border: InputBorder.none,
-                                hintText: 'Search an item')),
-                      ),
-                      SizedBox(width: 10),
-                      ElevatedButton(
-                        onPressed: () async {
-                          initialState = false;
-                          searchItem = searchEditingController.text;
-                          if (searchItem.isEmpty) {
-                            setState(() {
-                              initialState = true;
-                            });
-                          } else {
-                            setState(() {
-                              isLoading = true;
-                            });
-                            await getPostFoodDetails(context).then((value) {
-                              setState(() {
-                                isLoading = false;
-                              });
-                            });
-                          }
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 0),
-                          child: Icon(Icons.search),
+              child: GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                },
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text("Add A " + widget.mealType + " Item",
+                          style: getAppTextStyle(
+                              20, glb.main_foreground_header, true)),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                              controller: searchEditingController,
+                              decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.grey[200],
+                                  border: InputBorder.none,
+                                  hintText: 'Search an item',
+                                  hintStyle: getAppTextStyle(
+                                      16, Colors.grey[700], false))),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 40),
-                  (isLoading == true)
-                      ? Center(
-                          child: Column(children: [
-                            SizedBox(height: 40),
-                            CircularProgressIndicator()
-                          ]),
+                        SizedBox(width: 10),
+                        ElevatedButton(
+                          onPressed: () async {
+                            initialState = false;
+                            searchItem = searchEditingController.text;
+                            if (searchItem.isEmpty) {
+                              setState(() {
+                                initialState = true;
+                              });
+                            } else {
+                              setState(() {
+                                isLoading = true;
+                              });
+                              await getPostFoodDetails(context).then((value) {
+                                setState(() {
+                                  isLoading = false;
+                                });
+                              });
+                            }
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12.0, horizontal: 0),
+                            child: Icon(Icons.search),
+                          ),
                         )
-                      : (initialState == true)
-                          ? Center(
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 40),
-                                  Icon(
-                                    Icons.add_circle_rounded,
-                                    color: glb.main_foreground_dimmer,
-                                  ),
-                                  SizedBox(height: 15),
-                                  Text(
-                                    "What did you munch?",
-                                    style: getAppTextStyle(
-                                        14, glb.main_foreground_dimmer, false),
-                                  ),
-                                  SizedBox(height: 2),
-                                  Text("Search for it in the search box.",
+                      ],
+                    ),
+                    SizedBox(height: 40),
+                    (isLoading == true)
+                        ? Center(
+                            child: Column(children: [
+                              SizedBox(height: 40),
+                              CircularProgressIndicator()
+                            ]),
+                          )
+                        : (initialState == true)
+                            ? Center(
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 40),
+                                    Icon(
+                                      Icons.add_circle_rounded,
+                                      color: glb.main_foreground_dimmer,
+                                    ),
+                                    SizedBox(height: 15),
+                                    Text(
+                                      "What did you munch?",
                                       style: getAppTextStyle(14,
-                                          glb.main_foreground_dimmer, false))
-                                ],
-                              ),
-                            )
-                          : Expanded(
-                              child: ListView.builder(
-                                  physics: BouncingScrollPhysics(),
-                                  itemCount: finalItems.length,
-                                  itemBuilder: (context, index) {
-                                    return (index != 0 && index != 1)
-                                        ? GestureDetector(
-                                            onTap: () async {
-                                              await Navigator.of(context)
-                                                  .push(PageRouteBuilder(
-                                                      pageBuilder: (context,
-                                                          animation,
-                                                          anotherAnimation) {
-                                                        return ShowFoodDetailsView(
-                                                            index - 2,
-                                                            initialItems);
-                                                      },
-                                                      transitionDuration:
-                                                          Duration(
-                                                              milliseconds:
-                                                                  300),
-                                                      transitionsBuilder:
-                                                          (context,
-                                                              animation,
-                                                              anotherAnimation,
-                                                              child) {
-                                                        return SlideTransition(
-                                                          position: Tween(
-                                                                  begin: Offset(
-                                                                      1.0, 0.0),
-                                                                  end: Offset(
-                                                                      0.0, 0.0))
-                                                              .animate(
-                                                                  animation),
-                                                          child: child,
-                                                        );
-                                                      }))
-                                                  .then((value) {
-                                                glb.bnb.onTap(
-                                                    glb.bnb.currentIndex);
-                                              });
-                                            },
-                                            child: Container(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 10, vertical: 10),
-                                              margin: EdgeInsets.fromLTRB(
-                                                  0, 0, 0, 8),
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                  color: glb.main_secondary),
-                                              child: finalItems[index],
-                                            ),
-                                          )
-                                        : (index == 0
-                                            ? Text(" Results (per 100 g):",
-                                                style: getAppTextStyle(
-                                                    18,
-                                                    glb.main_foreground_header,
-                                                    true))
-                                            : finalItems[index]);
-                                  }),
-                            )
-                ],
+                                          glb.main_foreground_dimmer, false),
+                                    ),
+                                    SizedBox(height: 2),
+                                    Text("Search for it in the search box.",
+                                        style: getAppTextStyle(14,
+                                            glb.main_foreground_dimmer, false))
+                                  ],
+                                ),
+                              )
+                            : Expanded(
+                                child: ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    itemCount: finalItems.length,
+                                    itemBuilder: (context, index) {
+                                      return (index != 0 && index != 1)
+                                          ? GestureDetector(
+                                              onTap: () async {
+                                                await Navigator.of(context)
+                                                    .push(PageRouteBuilder(
+                                                        pageBuilder: (context,
+                                                            animation,
+                                                            anotherAnimation) {
+                                                          return ShowFoodDetailsView(
+                                                              index - 2,
+                                                              initialItems);
+                                                        },
+                                                        transitionDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        transitionsBuilder:
+                                                            (context,
+                                                                animation,
+                                                                anotherAnimation,
+                                                                child) {
+                                                          return SlideTransition(
+                                                            position: Tween(
+                                                                    begin:
+                                                                        Offset(
+                                                                            1.0,
+                                                                            0.0),
+                                                                    end: Offset(
+                                                                        0.0,
+                                                                        0.0))
+                                                                .animate(
+                                                                    animation),
+                                                            child: child,
+                                                          );
+                                                        }))
+                                                    .then((value) {
+                                                  glb.bnb.onTap(
+                                                      glb.bnb.currentIndex);
+                                                });
+                                              },
+                                              child: Container(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10,
+                                                    vertical: 10),
+                                                margin: EdgeInsets.fromLTRB(
+                                                    0, 0, 0, 8),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5),
+                                                    color: glb.main_secondary),
+                                                child: finalItems[index],
+                                              ),
+                                            )
+                                          : (index == 0
+                                              ? Text(" Results (per 100 g):",
+                                                  style: getAppTextStyle(
+                                                      18,
+                                                      glb.main_foreground_header,
+                                                      true))
+                                              : finalItems[index]);
+                                    }),
+                              )
+                  ],
+                ),
               ),
             ),
           )),
@@ -196,8 +208,10 @@ class _SearchFoodViewState extends State<SearchFoodView> {
         headers: <String, String>{
           'Content-Type': 'application/json',
         },
+        
         body: jsonEncode(
             <String, String>{'query': searchItem, 'pageSize': '20'}));
+
     //TODO: Add snack bar for INTERNET_SWITCHED_OFF Condition
     if (response.statusCode == 200) {
       initialItems = json.decode(response.body.toString())['foods'];

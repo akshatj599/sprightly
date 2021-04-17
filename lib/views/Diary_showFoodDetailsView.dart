@@ -44,6 +44,8 @@ class ShowFoodDetailsView extends StatefulWidget {
 }
 
 class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
+  TextEditingController quantityController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -60,71 +62,135 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 15),
-                  child: Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.only(bottom: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: glb.main_secondary),
-                        child: Text(widget.currItemName,
-                            style: getAppTextStyle(18, Colors.black, true)),
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.only(bottom: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: glb.main_background),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Serving",
-                                style: getAppTextStyle(
-                                    16, glb.main_foreground_header, false)),
-                            Text("100 g",
-                                style: getAppTextStyle(
-                                    16, glb.main_foreground_dimmer, false))
-                          ],
+                  child: GestureDetector(
+                    onTap: (){
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                    },
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          margin: EdgeInsets.only(bottom: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: glb.main_secondary),
+                          child: Text(widget.currItemName,
+                              style: getAppTextStyle(18, Colors.black, true)),
                         ),
-                      ),
-                      Container(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                        margin: EdgeInsets.only(bottom: 8),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: glb.main_background),
-                        child: PieChart(
-                          dataMap: widget.nutrientMap,
-                          chartType: ChartType.ring,
-                          animationDuration: Duration(milliseconds: 2000),
-                          initialAngleInDegree: 0,
-                          colorList: [
-                            Color(0xFF74b9ff),
-                            Color(0xFF55efc4),
-                            Color(0xFFff7675),
-                            Color(0xFFffeaa7),
-                          ],
-                          chartRadius: MediaQuery.of(context).size.width / 4,
-                          chartValuesOptions:
-                              ChartValuesOptions(showChartValues: false),
-                          legendOptions: LegendOptions(
-                              legendTextStyle: getAppTextStyle(
-                                  14,
-                                  glb.dark_theme
-                                      ? glb.main_foreground_header
-                                      : glb.main_foreground_dimmer,
-                                  false)),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: glb.main_background),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Serving",
+                                  style: getAppTextStyle(
+                                      16, glb.main_foreground_header, false)),
+                              Text("100 g",
+                                  style: getAppTextStyle(
+                                      16, glb.main_foreground_dimmer, false))
+                            ],
+                          ),
                         ),
-                      ),
-                      makeNutrientListColumn(context)
-                    ],
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: glb.main_background),
+                          child: PieChart(
+                            dataMap: widget.nutrientMap,
+                            chartType: ChartType.ring,
+                            animationDuration: Duration(milliseconds: 2000),
+                            initialAngleInDegree: 0,
+                            colorList: [
+                              Color(0xFF74b9ff),
+                              Color(0xFF55efc4),
+                              Color(0xFFff7675),
+                              Color(0xFFffeaa7),
+                            ],
+                            chartRadius: MediaQuery.of(context).size.width / 4,
+                            chartValuesOptions:
+                                ChartValuesOptions(showChartValues: false),
+                            legendOptions: LegendOptions(
+                                legendTextStyle: getAppTextStyle(
+                                    14,
+                                    glb.dark_theme
+                                        ? glb.main_foreground_header
+                                        : glb.main_foreground_dimmer,
+                                    false)),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
+                          margin: EdgeInsets.only(bottom: 8),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: glb.main_background),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    height: 46,
+                                    width:
+                                        MediaQuery.of(context).size.width / 4,
+                                    child: TextField(
+
+                                      controller: quantityController,
+                                      decoration: InputDecoration(                                        
+                                          border: InputBorder.none,
+                                          filled: true,
+                                          fillColor: Colors.grey[200],
+                                          contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 0),
+                                          hintText: 'Weight',
+                                          hintStyle: getAppTextStyle(
+                                              16, Colors.grey[700], false),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.transparent,
+                                                width: 1),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(5.0)),
+                                            borderSide: BorderSide(
+                                                color: Colors.blue, width: 1),
+                                          )),
+                                    ),
+                                  ),
+                                  Text("  grams",
+                                      style: getAppTextStyle(16,
+                                          glb.main_foreground_header, false)),
+                                ],
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0, vertical: 12.0),
+                                    child: Text("Add",
+                                        style: getAppTextStyle(
+                                            16, Colors.white, false))),
+                              ),
+                            ],
+                          ),
+                        ),
+                        makeNutrientListColumn(context)
+                      ],
+                    ),
                   ),
                 ),
               ),
