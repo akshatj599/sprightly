@@ -43,7 +43,12 @@ class _InputPageState extends State<InputPage> {
                   borderRadius: BorderRadius.circular(10)),
               child: Text(
                 "Calculate Your BMI",
-                style: getAppTextStyle(18, glb.main_foreground_header, true),
+                style: getAppTextStyle(
+                    18,
+                    glb.dark_theme
+                        ? Colors.grey[900]
+                        : glb.main_foreground_header,
+                    true),
               ),
             ),
             SizedBox(height: 10),
@@ -124,8 +129,8 @@ class _InputPageState extends State<InputPage> {
                       inactiveTrackColor: Colors.grey[200],
                       activeTrackColor: Colors.orange[300],
                       thumbColor: Colors.orange[800],
-                          // ? Colors.purple[900]
-                          // : Colors.pink[400],
+                      // ? Colors.purple[900]
+                      // : Colors.pink[400],
                       overlayColor: Color(0x29EB1555),
                       thumbShape:
                           RoundSliderThumbShape(enabledThumbRadius: 15.0),
