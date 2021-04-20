@@ -213,7 +213,6 @@ class _SearchFoodViewState extends State<SearchFoodView> {
         body: jsonEncode(
             <String, String>{'query': searchItem, 'pageSize': '20'}));
 
-    //TODO: Add snack bar for INTERNET_SWITCHED_OFF Condition
     if (response.statusCode == 200) {
       initialItems = json.decode(response.body.toString())['foods'];
       List<Widget> temp = [];

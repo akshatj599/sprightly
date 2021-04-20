@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "166214316961",
+    "project_id": "sprightly-de1a5",
+    "storage_bucket": "sprightly-de1a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:166214316961:android:8c2c5b595b04ead419d1e0",
+        "android_client_info": {
+          "package_name": "com.akj.sprightly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "166214316961-n11duikunfskp7oa2774mnoik0d38t15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB21ZuXxwkBHTgpipcRDIkDbMjFr8TGHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "166214316961-n11duikunfskp7oa2774mnoik0d38t15.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

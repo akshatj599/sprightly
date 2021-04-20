@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:sprightly/views/AppHomeScreen.dart';
+import 'package:sprightly/views/Home_main.dart';
 import 'package:sprightly/widgets/chart.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:sprightly/Home_BMI/components/bottom_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class AccountView extends StatefulWidget {
   @override
@@ -12,18 +15,25 @@ class AccountView extends StatefulWidget {
 
 class _AccountViewState extends State<AccountView> {
   String userName;
-  String country;
+  String gender;
   String emailId;
   int goal_weight;
   int goal_calories;
 
-  Future<void> getDataFromFirebase() {
-    userName = "SKC";
-    country = "India";
-    emailId = "skc007@gmail.com";
-    goal_weight = 10;
-    goal_calories = 3000;
-    //TODO: Get data from FB
+  void getDataFromFirebase() {
+    userName = "Not found";
+    gender = "Not found";
+    emailId = "Not found";
+    goal_weight = 0;
+    goal_calories = 0;
+    if (glb.currentUserDetails.isNotEmpty) {
+      userName = glb.currentUserDetails['Username'];
+      gender = glb.currentUserDetails['Gender'];
+      emailId = glb.currentUserDetails['Email'];
+      goal_weight = glb.currentUserDetails['Target Weight'] ??
+          glb.currentUserDetails['Weight'];
+      goal_calories = glb.currentUserDetails['Target Calories'];
+    }
   }
 
   @override
@@ -94,12 +104,12 @@ class _AccountViewState extends State<AccountView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Country: ",
+                        "Gender: ",
                         style: getAppTextStyle(
                             16, glb.main_foreground_dimmer, false),
                       ),
                       Text(
-                        country,
+                        gender,
                         style: getAppTextStyle(
                             16, glb.main_foreground_header, true),
                       ),
@@ -108,7 +118,18 @@ class _AccountViewState extends State<AccountView> {
                   SizedBox(
                     height: 20,
                   ),
-                  BottomButton(buttonTitle: 'Sign Out', onTap: () {}),
+                  BottomButton(
+                      buttonTitle: 'Sign Out',
+                      onTap: () {
+                        FirebaseAuth.instance.signOut();
+                        glb.isUserSignedIn = false;
+                        glb.currentUserDetails = {};
+                        print("User Signed Out");
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AppHomeScreen()));
+                      }),
                 ],
               ),
             ),
@@ -146,7 +167,7 @@ class _AccountViewState extends State<AccountView> {
                           child: Column(
                             children: [
                               Text(
-                                goal_weight.toString(),
+                                goal_weight.toString() + " kg",
                                 style: getAppTextStyle(
                                     40, glb.main_foreground_header, true),
                               ),

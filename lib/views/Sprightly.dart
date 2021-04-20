@@ -6,8 +6,14 @@ import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/views/Home_main.dart';
 import 'package:sprightly/views/Diary_main.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class SprightlyHome extends StatefulWidget {
+  bool newUserCreated;
+
+  SprightlyHome(this.newUserCreated);
+
   @override
   _SprightlyHomeState createState() => _SprightlyHomeState();
 }
@@ -103,6 +109,19 @@ class _SprightlyHomeState extends State<SprightlyHome> {
           bottomNavigationBar: glb.bnb),
     );
     glb.context = context;
+    if (widget.newUserCreated) {
+      widget.newUserCreated = false;
+      Future.delayed(Duration(seconds: 3), () {
+        showTopSnackBar(
+          context,
+          CustomSnackBar.success(
+            message: "Registration Successful",
+            textStyle: getAppTextStyle(16, Colors.white, true),
+          ),
+          displayDuration: Duration(seconds: 1),
+        );
+      });
+    }
     return container;
   }
 }

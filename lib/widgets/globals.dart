@@ -3,9 +3,12 @@ library my_prj.globals;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sprightly/views/Sprightly.dart';
+import 'package:sprightly/views/Recipe_main.dart';
 
 BuildContext context;
 BottomNavigationBar bnb;
+Map<String, Map<String, Map<String, dynamic>>> allCategories =
+    Map(); //For Recipes
 
 bool dark_theme = true;
 Color main_background;
@@ -14,6 +17,8 @@ Color main_foreground_dimmer;
 Color main_scaffold_background;
 Color main_appBar;
 Color main_secondary;
+bool isUserSignedIn;
+Map<String, dynamic> currentUserDetails = {};
 
 void switchTheme() {
   if (!dark_theme) {
@@ -29,7 +34,7 @@ void switchTheme() {
     //light colors
     dark_theme = false;
     main_background = Colors.white;
-    main_foreground_header = Colors.black;
+    main_foreground_header = Colors.grey[900];
     main_foreground_dimmer = Colors.grey[700];
     main_scaffold_background = Colors.grey[350];
     main_appBar = Colors.orange[400];

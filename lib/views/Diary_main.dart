@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/caloriesRemaining.dart';
 import 'package:date_format/date_format.dart';
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/widgets/DiaryMealCard.dart';
+import 'package:sprightly/widgets/diaryMealCard.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
 
 class Diary extends StatefulWidget {

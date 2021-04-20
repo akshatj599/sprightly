@@ -10,12 +10,15 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    //TODO: BMI
     return Column(
       children: [
         CaloriesRemaining(),
-        Divider(color: Colors.grey[800],endIndent: 20, indent: 20,),
-        InputPage()
+        Divider(
+          color: Colors.grey[800],
+          endIndent: 20,
+          indent: 20,
+        ),
+        InputPage() //BMI
       ],
     );
   }
