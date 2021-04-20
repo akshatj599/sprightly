@@ -159,15 +159,12 @@ class _RecipeState extends State<Recipe> {
                 )),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Container(
-                height: 70,
-                child: Text(
-                  title,
-                  style: getAppTextStyle(16, glb.main_foreground_header, false),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  // maxLines: 3,
-                ),
+              child: Text(
+                title + "\n\n",
+                style: getAppTextStyle(16, glb.main_foreground_header, false),
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+                // maxLines: 3,
               ),
             ),
             Padding(

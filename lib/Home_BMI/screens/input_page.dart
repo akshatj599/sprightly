@@ -39,7 +39,7 @@ class _InputPageState extends State<InputPage> {
               margin: EdgeInsets.symmetric(horizontal: 5),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: glb.main_background,
+                  color: glb.main_secondary,
                   borderRadius: BorderRadius.circular(10)),
               child: Text(
                 "Calculate Your BMI",
