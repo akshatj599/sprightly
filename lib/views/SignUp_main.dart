@@ -118,8 +118,22 @@ class _SignUpViewState extends State<SignUpView> {
                     Navigator.pop(context);
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => SprightlyHome(true)),
+                        PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, anotherAnimation) {
+                              return SprightlyHome(true);
+                            },
+                            transitionDuration: Duration(milliseconds: 300),
+                            transitionsBuilder:
+                                (context, animation, anotherAnimation, child) {
+                              return SlideTransition(
+                                position: Tween(
+                                        begin: Offset(1.0, 0.0),
+                                        end: Offset(0.0, 0.0))
+                                    .animate(animation),
+                                child: child,
+                              );
+                            }),
                         ModalRoute.withName("/AppHomeScreen"));
                     print("User & Details Added Successfully");
                   } else {
@@ -597,9 +611,34 @@ class _SignUpViewState extends State<SignUpView> {
                                                 onTap: () {
                                                   Navigator.pushReplacement(
                                                       context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              SignInView()));
+                                                      PageRouteBuilder(
+                                                          pageBuilder: (context,
+                                                              animation,
+                                                              anotherAnimation) {
+                                                            return SignInView();
+                                                          },
+                                                          transitionDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      300),
+                                                          transitionsBuilder:
+                                                              (context,
+                                                                  animation,
+                                                                  anotherAnimation,
+                                                                  child) {
+                                                            return SlideTransition(
+                                                              position: Tween(
+                                                                      begin: Offset(
+                                                                          1.0,
+                                                                          0.0),
+                                                                      end: Offset(
+                                                                          0.0,
+                                                                          0.0))
+                                                                  .animate(
+                                                                      animation),
+                                                              child: child,
+                                                            );
+                                                          }));
                                                 },
                                                 child: Text(
                                                   "Sign In.",

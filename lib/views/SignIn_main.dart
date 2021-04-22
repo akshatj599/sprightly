@@ -65,7 +65,7 @@ class _SignInViewState extends State<SignInView> {
                       ),
                     ),
                     Expanded(
-                      flex: 8,
+                      flex: 6,
                       child: Container(
                           height: MediaQuery.of(context).size.height -
                               (MediaQuery.of(context).size.height / 4 + 80),
@@ -148,7 +148,9 @@ class _SignInViewState extends State<SignInView> {
                                             height: 70,
                                             child: GestureDetector(
                                               onTap: () async {
-                                                FocusScope.of(context).requestFocus(new FocusNode());
+                                                FocusScope.of(context)
+                                                    .requestFocus(
+                                                        new FocusNode());
                                                 bool valid = emailFormKey
                                                     .currentState
                                                     .validate();
@@ -226,7 +228,7 @@ class _SignInViewState extends State<SignInView> {
                                             height: 40,
                                             child: BottomButton(
                                               buttonTitle: "Sign In",
-                                              onTap: () async {                                                
+                                              onTap: () async {
                                                 setState(() {
                                                   isLoading = true;
                                                 });
@@ -250,10 +252,36 @@ class _SignInViewState extends State<SignInView> {
                                                 }
                                                 Navigator.pushAndRemoveUntil(
                                                     context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            SprightlyHome(
-                                                                false)),
+                                                    PageRouteBuilder(
+                                                        pageBuilder: (context,
+                                                            animation,
+                                                            anotherAnimation) {
+                                                          return SprightlyHome(
+                                                              false);
+                                                        },
+                                                        transitionDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    300),
+                                                        transitionsBuilder:
+                                                            (context,
+                                                                animation,
+                                                                anotherAnimation,
+                                                                child) {
+                                                          return SlideTransition(
+                                                            position: Tween(
+                                                                    begin:
+                                                                        Offset(
+                                                                            1.0,
+                                                                            0.0),
+                                                                    end: Offset(
+                                                                        0.0,
+                                                                        0.0))
+                                                                .animate(
+                                                                    animation),
+                                                            child: child,
+                                                          );
+                                                        }),
                                                     ModalRoute.withName(
                                                         "/AppHomeScreen"));
                                               },
@@ -288,9 +316,34 @@ class _SignInViewState extends State<SignInView> {
                                                   onTap: () {
                                                     Navigator.pushReplacement(
                                                         context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                SignUpView()));
+                                                        PageRouteBuilder(
+                                                            pageBuilder: (context,
+                                                                animation,
+                                                                anotherAnimation) {
+                                                              return SignUpView();
+                                                            },
+                                                            transitionDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        300),
+                                                            transitionsBuilder:
+                                                                (context,
+                                                                    animation,
+                                                                    anotherAnimation,
+                                                                    child) {
+                                                              return SlideTransition(
+                                                                position: Tween(
+                                                                        begin: Offset(
+                                                                            1.0,
+                                                                            0.0),
+                                                                        end: Offset(
+                                                                            0.0,
+                                                                            0.0))
+                                                                    .animate(
+                                                                        animation),
+                                                                child: child,
+                                                              );
+                                                            }));
                                                   },
                                                   child: Text(
                                                     "Create an account.",
