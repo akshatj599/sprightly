@@ -21,7 +21,20 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
   Column doIfSignedIn(BuildContext context) {
     Future.delayed(Duration(seconds: 2), () {
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => SprightlyHome(false)));
+          PageRouteBuilder(
+                pageBuilder: (context, animation, anotherAnimation) {
+                  return SprightlyHome(false);
+                },
+                transitionDuration: Duration(milliseconds: 300),
+                transitionsBuilder:
+                    (context, animation, anotherAnimation, child) {
+                  return SlideTransition(
+                    position:
+                        Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                            .animate(animation),
+                    child: child,
+                  );
+                }));
     });
     return Column(
       children: [
@@ -75,8 +88,20 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                         if (!glb.isUserSignedIn) {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignInView()));
+                              PageRouteBuilder(
+                pageBuilder: (context, animation, anotherAnimation) {
+                  return SignInView();
+                },
+                transitionDuration: Duration(milliseconds: 300),
+                transitionsBuilder:
+                    (context, animation, anotherAnimation, child) {
+                  return SlideTransition(
+                    position:
+                        Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                            .animate(animation),
+                    child: child,
+                  );
+                }));
                         }
                       },
                     ),
@@ -93,8 +118,20 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                         if (glb.isUserSignedIn != true) {
                           Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpView()));
+                              PageRouteBuilder(
+                pageBuilder: (context, animation, anotherAnimation) {
+                  return SignUpView();
+                },
+                transitionDuration: Duration(milliseconds: 300),
+                transitionsBuilder:
+                    (context, animation, anotherAnimation, child) {
+                  return SlideTransition(
+                    position:
+                        Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                            .animate(animation),
+                    child: child,
+                  );
+                }));
                         }
                       },
                     ),
