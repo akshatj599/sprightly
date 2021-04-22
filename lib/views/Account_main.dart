@@ -122,7 +122,6 @@ class _AccountViewState extends State<AccountView> {
                       buttonTitle: 'Sign Out',
                       onTap: () {
                         FirebaseAuth.instance.signOut();
-                        glb.isUserSignedIn = false;
                         glb.currentUserDetails = {};
                         print("User Signed Out");
                         Navigator.pushReplacement(

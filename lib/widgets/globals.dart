@@ -17,7 +17,6 @@ Color main_foreground_dimmer;
 Color main_scaffold_background;
 Color main_appBar;
 Color main_secondary;
-bool isUserSignedIn;
 Map<String, dynamic> currentUserDetails = {};
 
 void switchTheme() {

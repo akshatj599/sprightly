@@ -17,11 +17,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     glb.switchTheme();
     if (FirebaseAuth.instance.currentUser != null) {
-      glb.isUserSignedIn = true;
       getUserDetailsFromFB();
-    } else {
-      glb.isUserSignedIn = false;
     }
+    
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sprightly',

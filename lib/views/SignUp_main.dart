@@ -64,6 +64,21 @@ class _SignUpViewState extends State<SignUpView> {
               height: 80,
             ),
             desc: "Click on the link sent at " + emailController.text,
+            onWillPopActive: true,
+            closeFunction: () async {
+              try {
+                await FirebaseAuth.instance.currentUser.delete();
+                showSnackBar("Previous sign up attempt cancelled", context);
+              } on FirebaseAuthException catch (error) {
+                if (error.code == 'requires-recent-login') {
+                  print(
+                      'The user must reauthenticate before this operation can be executed.');
+                }
+                showSnackBar(error.message, context);
+              } finally {
+                Navigator.pop(context);
+              }
+            },
             buttons: [
               DialogButton(
                 onPressed: () async {
@@ -98,7 +113,6 @@ class _SignUpViewState extends State<SignUpView> {
                       "Target Calories": calculateCalories(bmr)
                     };
                     await users.doc(emailController.text).set({"Details": map});
-                    glb.isUserSignedIn = true;
                     glb.currentUserDetails = map;
                     glb.currentUserDetails['Email'] = emailController.text;
                     Navigator.pop(context);
@@ -320,7 +334,8 @@ class _SignUpViewState extends State<SignUpView> {
                                           height: 20,
                                         ),
                                         TextFormField(
-                                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
                                           controller: weightController,
                                           validator: (val) {
                                             return (val.isNotEmpty &&
@@ -339,7 +354,8 @@ class _SignUpViewState extends State<SignUpView> {
                                           height: 20,
                                         ),
                                         TextFormField(
-                                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                                          autovalidateMode: AutovalidateMode
+                                              .onUserInteraction,
                                           controller: heightController,
                                           validator: (val) {
                                             return (val.isNotEmpty &&
@@ -386,6 +402,8 @@ class _SignUpViewState extends State<SignUpView> {
                                             color: Colors.grey[700],
                                           ),
                                           onChanged: (String newValue) {
+                                            FocusScope.of(context)
+                                                .requestFocus(new FocusNode());
                                             setState(() {
                                               gender = newValue;
                                             });
@@ -415,6 +433,8 @@ class _SignUpViewState extends State<SignUpView> {
                                             color: Colors.grey[700],
                                           ),
                                           onChanged: (String newValue) {
+                                            FocusScope.of(context)
+                                                .requestFocus(new FocusNode());
                                             setState(() {
                                               wishValue = newValue;
                                             });
@@ -477,6 +497,9 @@ class _SignUpViewState extends State<SignUpView> {
                                                     ),
                                                     onChanged:
                                                         (String newValue) {
+                                                      FocusScope.of(context)
+                                                          .requestFocus(
+                                                              new FocusNode());
                                                       setState(() {
                                                         targetPerWeek =
                                                             newValue;
@@ -514,6 +537,8 @@ class _SignUpViewState extends State<SignUpView> {
                                             color: Colors.grey[700],
                                           ),
                                           onChanged: (String newValue) {
+                                            FocusScope.of(context)
+                                                .requestFocus(new FocusNode());
                                             setState(() {
                                               exerciseFactor = newValue;
                                             });

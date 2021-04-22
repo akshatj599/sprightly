@@ -238,7 +238,6 @@ class _SignInViewState extends State<SignInView> {
                                                           password:
                                                               passwordController
                                                                   .text);
-                                                  glb.isUserSignedIn = true;
                                                   print("User Signed In");
                                                   getUserDetailsFromFB();
                                                 } catch (error) {

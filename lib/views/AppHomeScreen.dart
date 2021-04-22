@@ -72,7 +72,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                     child: BottomButton(
                       buttonTitle: "Sign In",
                       onTap: () {
-                        if (!glb.isUserSignedIn) {
+                        if (FirebaseAuth.instance.currentUser == null) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -90,7 +90,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                     child: BottomButton(
                       buttonTitle: "Sign Up",
                       onTap: () {
-                        if (glb.isUserSignedIn != true) {
+                        if (FirebaseAuth.instance.currentUser == null) {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -102,7 +102,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                   SizedBox(
                     height: 30,
                   ),
-                  (glb.isUserSignedIn)
+                  (FirebaseAuth.instance.currentUser != null)
                       ? doIfSignedIn(context)
                       : SizedBox(height: 0)
                 ],
