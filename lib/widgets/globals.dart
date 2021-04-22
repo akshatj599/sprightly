@@ -18,6 +18,7 @@ Color main_scaffold_background;
 Color main_appBar;
 Color main_secondary;
 Map<String, dynamic> currentUserDetails = {};
+bool diary_runFbFunc = true;
 
 void switchTheme() {
   if (!dark_theme) {

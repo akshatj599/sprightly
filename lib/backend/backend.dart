@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sprightly/views/Recipe_main.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
 
-Future<void> getUserDetailsFromFB() async {
+Future<void> getUserDetailsFromFB() {
   FirebaseFirestore.instance
       .collection('Users')
       .doc(FirebaseAuth.instance.currentUser.email)

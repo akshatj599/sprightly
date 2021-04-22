@@ -141,8 +141,9 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                                                             animation,
                                                             anotherAnimation) {
                                                           return ShowFoodDetailsView(
-                                                              index - 2,
-                                                              initialItems);
+                                                              initialItems[index - 2],
+                                                              widget.mealType,
+                                                              true, "100");
                                                         },
                                                         transitionDuration:
                                                             Duration(

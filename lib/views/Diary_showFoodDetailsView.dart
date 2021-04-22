@@ -3,16 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:date_format/date_format.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ShowFoodDetailsView extends StatefulWidget {
-  int currItemIndex;
-  List<dynamic> initialItems;
+  Map currItemMap;
   String currItemName;
   List<dynamic> nutrientList;
   Map<String, double> nutrientMap;
+  String foodCategory;
+  bool fromSearchFoodView; //true -> searchFoodView, false -> diary
+  String weight;
 
-  ShowFoodDetailsView(this.currItemIndex, this.initialItems) {
-    var currItemMap = this.initialItems[this.currItemIndex];
+  ShowFoodDetailsView(this.currItemMap, this.foodCategory,
+      this.fromSearchFoodView, this.weight) {
     currItemName = capitalizeEachWord(currItemMap['description'], true);
     nutrientList = currItemMap['foodNutrients'];
     nutrientMap = {
@@ -45,9 +51,48 @@ class ShowFoodDetailsView extends StatefulWidget {
 
 class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
   TextEditingController quantityController = TextEditingController();
+  bool flag = true;
+
+  Future<void> addFoodItemToDiaryFB() async {
+    if (RegExp("^[0-9]{0,5}(\.[0-9]{1}){0,1}\$")
+        .hasMatch(quantityController.text)) {
+      double finalWeight;
+      if (quantityController.text.isNotEmpty) {
+        finalWeight = double.parse(quantityController.text);
+      } else {
+        finalWeight = 100.0;
+      }
+      widget.currItemMap["Weight"] = finalWeight;
+      FirebaseFirestore fb = FirebaseFirestore.instance;
+      await fb
+          .collection('Users')
+          .doc(FirebaseAuth.instance.currentUser.email)
+          .update({
+        'Diary.' +
+            formatDate(DateTime.now(), [D, ', ', M, ' ', dd, ' \'', yy]) +
+            '.' +
+            widget.foodCategory +
+            '.' +
+            widget.currItemName: widget.currItemMap
+      });
+      showSnackBar(
+          "Item Added / Updated: " +
+              widget.currItemName +
+              " - " +
+              finalWeight.toString() +
+              "g",
+          context);
+      glb.diary_runFbFunc = true;
+    } else
+      showSnackBar("Please enter a valid weight", context);
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (flag && !widget.fromSearchFoodView) {
+      flag = false;
+      quantityController.text = widget.weight;
+    }
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
@@ -77,8 +122,92 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: glb.main_secondary),
-                          child: Text(widget.currItemName,
-                              style: getAppTextStyle(18, Colors.black, true)),
+                          child: (!widget.fromSearchFoodView)
+                              ? Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(widget.currItemName,
+                                        style: getAppTextStyle(
+                                            18, Colors.black, true)),
+                                    IconButton(
+                                        icon: Icon(
+                                          Icons.delete,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () {
+                                          Alert(
+                                            onWillPopActive: true,
+                                            style: AlertStyle(
+                                                titleStyle: getAppTextStyle(
+                                                    18, Colors.black, true),
+                                                descStyle: getAppTextStyle(16,
+                                                    Colors.grey[800], true)),
+                                            context: context,
+                                            type: AlertType.warning,
+                                            title: "Are you sure?",
+                                            desc:
+                                                "This item will be deleted from your diary",
+                                            buttons: [
+                                              DialogButton(
+                                                  child: Text(
+                                                    "Cancel",
+                                                    style: getAppTextStyle(16,
+                                                        Colors.white, false),
+                                                  ),
+                                                  onPressed: () =>
+                                                      Navigator.pop(context),
+                                                  color: Colors.grey),
+                                              DialogButton(
+                                                child: Text(
+                                                  "Delete",
+                                                  style: getAppTextStyle(
+                                                      16, Colors.white, false),
+                                                ),
+                                                color: Color(0xFFEC407A),
+                                                onPressed: () async {
+                                                  FirebaseFirestore fb =
+                                                      FirebaseFirestore
+                                                          .instance;
+                                                  await fb
+                                                      .collection('Users')
+                                                      .doc(FirebaseAuth.instance
+                                                          .currentUser.email)
+                                                      .update({
+                                                    'Diary.' +
+                                                            formatDate(
+                                                                DateTime.now(), [
+                                                              D,
+                                                              ', ',
+                                                              M,
+                                                              ' ',
+                                                              dd,
+                                                              ' \'',
+                                                              yy
+                                                            ]) +
+                                                            '.' +
+                                                            widget.foodCategory +
+                                                            '.' +
+                                                            widget.currItemName:
+                                                        FieldValue.delete()
+                                                  });
+                                                  showSnackBar(
+                                                      "Item Deleted: " +
+                                                          widget.currItemName,
+                                                      context);
+                                                  glb.diary_runFbFunc = true;
+                                                  Navigator.pop(context);
+                                                  Navigator.pop(context);
+                                                },
+                                              )
+                                            ],
+                                          ).show();
+                                        })
+                                  ],
+                                )
+                              : Text(widget.currItemName,
+                                  style:
+                                      getAppTextStyle(18, Colors.black, true)),
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(
@@ -177,11 +306,16 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                                 ],
                               ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  addFoodItemToDiaryFB();
+                                },
                                 child: Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0, vertical: 10.0),
-                                    child: Text("Add",
+                                    child: Text(
+                                        (widget.fromSearchFoodView)
+                                            ? "Add"
+                                            : "Update",
                                         style: getAppTextStyle(
                                             16, Colors.white, false))),
                               ),

@@ -86,9 +86,11 @@ class _SignUpViewState extends State<SignUpView> {
                   if (_auth.currentUser.emailVerified) {
                     showTopSnackBar(
                       context,
-                      CustomSnackBar.success(
-                        message: "Email verified",
+                      CustomSnackBar.info(
+                        message: "Email verified. Please wait for a moment.",
                         textStyle: getAppTextStyle(16, Colors.white, true),
+                        icon: Icon(Icons.timer,
+                            size: 120, color: Color(0x15000000)),
                       ),
                       displayDuration: Duration(seconds: 1),
                     );
@@ -113,6 +115,7 @@ class _SignUpViewState extends State<SignUpView> {
                       "Target Calories": calculateCalories(bmr)
                     };
                     await users.doc(emailController.text).set({"Details": map});
+                    await users.doc(emailController.text).update({"Diary": {}});
                     glb.currentUserDetails = map;
                     glb.currentUserDetails['Email'] = emailController.text;
                     Navigator.pop(context);
@@ -139,7 +142,7 @@ class _SignUpViewState extends State<SignUpView> {
                   } else {
                     showTopSnackBar(
                       context,
-                      CustomSnackBar.info(
+                      CustomSnackBar.error(
                         message: "Not verified yet",
                         textStyle: getAppTextStyle(16, Colors.white, true),
                       ),

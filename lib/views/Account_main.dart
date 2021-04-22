@@ -17,7 +17,7 @@ class _AccountViewState extends State<AccountView> {
   String userName;
   String gender;
   String emailId;
-  int goal_weight;
+  double goal_weight;
   int goal_calories;
 
   void getDataFromFirebase() {
