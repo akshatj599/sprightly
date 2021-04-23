@@ -38,7 +38,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
     });
     return Column(
       children: [
-        CircularProgressIndicator(),
+        CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A))),
         Text(
           "Signing in as",
           style: getAppTextStyle(16, Colors.white, false),

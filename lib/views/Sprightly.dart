@@ -39,6 +39,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
     if (_navigationBarCurrIndex == 0) {
       newPage = Home();
     } else if (_navigationBarCurrIndex == 1) {
+      glb.diary_runFbFunc = true;
       newPage = Diary();
     } else if (_navigationBarCurrIndex == 2) {
       newPage = Recipe();
@@ -108,7 +109,6 @@ class _SprightlyHomeState extends State<SprightlyHome> {
           ),
           bottomNavigationBar: glb.bnb),
     );
-    glb.context = context;
     if (widget.newUserCreated) {
       widget.newUserCreated = false;
       Future.delayed(Duration(seconds: 3), () {

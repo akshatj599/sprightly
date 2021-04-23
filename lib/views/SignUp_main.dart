@@ -263,6 +263,7 @@ class _SignUpViewState extends State<SignUpView> {
                               vertical: 20, horizontal: 10),
                           decoration: getGradientBoxDecoration(),
                           child: SingleChildScrollView(
+                            physics: BouncingScrollPhysics(),
                             controller: scrollController,
                             child: Column(
                               children: [
@@ -312,7 +313,7 @@ class _SignUpViewState extends State<SignUpView> {
                                             style: getAppTextStyle(
                                                 16, Colors.grey[900], false)),
                                         SizedBox(
-                                          height: 30,
+                                          height: 20,
                                         ),
                                         TextFormField(
                                           controller: passwordController,
@@ -594,7 +595,7 @@ class _SignUpViewState extends State<SignUpView> {
                                                 width: 20,
                                                 height: 20,
                                                 child:
-                                                    CircularProgressIndicator())
+                                                    CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A))))
                                             : SizedBox(height: 30),
 
                                         //Create an account

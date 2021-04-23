@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sprightly/views/Sprightly.dart';
 import 'package:sprightly/views/Recipe_main.dart';
+import 'package:date_format/date_format.dart';
 
 BuildContext context;
 BottomNavigationBar bnb;
@@ -18,7 +19,12 @@ Color main_scaffold_background;
 Color main_appBar;
 Color main_secondary;
 Map<String, dynamic> currentUserDetails = {};
+List<Map<String, num>> chartMapList = [];
 bool diary_runFbFunc = true;
+
+int goal = 0;
+double foodCaloriesToday = 0;
+double exerciseCaloriesToday = 0;
 
 void switchTheme() {
   if (!dark_theme) {
@@ -60,7 +66,7 @@ AppBar appBar_Sprightly(Function fn) {
                         child: Icon(
                           Icons.brightness_2_outlined,
                           size: 25,
-                          color: Colors.orange[400],
+                          color: Color(0xFFEC407A),
                         ))
                     : Icon(
                         Icons.wb_sunny_outlined,

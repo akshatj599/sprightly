@@ -2,8 +2,11 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:sprightly/backend/backend.dart';
 
 class LineChartSample2 extends StatefulWidget {
+  Function funcToCall;
+  LineChartSample2(this.funcToCall);
   @override
   _LineChartSample2State createState() => _LineChartSample2State();
 }
@@ -15,24 +18,23 @@ class _LineChartSample2State extends State<LineChartSample2> {
   ];
 
   bool showAvg = false;
-  List<FlSpot> graphPoints;
+  List<FlSpot> graphPoints = [];
 
-  void createPointListFromFB() {
-    //TODO: Get chart points from FB
-    graphPoints = [
-      FlSpot(0, 1.5),
-      FlSpot(1, 1.2),
-      FlSpot(2, 1.9),
-      FlSpot(3, 0.7),
-      FlSpot(4, 0.5),
-      FlSpot(5, 2.3),
-      FlSpot(6, 2.1),
-    ];
+  void createPointList() {
+    print("createPointList() called");
+    graphPoints = [];
+    double index = 0;
+    glb.chartMapList.forEach((map) {
+      map.forEach((key, value) {
+        graphPoints.add(FlSpot(index, double.parse((value/1000).toStringAsFixed(3))));
+      });
+      index++;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    createPointListFromFB();
+    createPointList();
     return Container(
       padding: EdgeInsets.only(top: 15),
       margin: EdgeInsets.only(bottom: 10),
@@ -43,8 +45,26 @@ class _LineChartSample2State extends State<LineChartSample2> {
           color: glb.main_background),
       child: Column(
         children: [
-          Text("Performance this week",
-              style: getAppTextStyle(18, glb.main_foreground_header, true)),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text("Performance this week",
+                    style:
+                        getAppTextStyle(18, glb.main_foreground_header, true)),
+                IconButton(
+                    icon:
+                        Icon(Icons.refresh, color: glb.main_foreground_header),
+                    onPressed: () {
+                      setState(() {
+                        print("setState for chart called");
+                      });
+                      widget.funcToCall();
+                    })
+              ],
+            ),
+          ),
           AspectRatio(
             aspectRatio: 1.70,
             child: Container(
@@ -95,19 +115,61 @@ class _LineChartSample2State extends State<LineChartSample2> {
           getTitles: (value) {
             switch (value.toInt()) {
               case 0:
-                return 'M';
+                {
+                  String s;
+                  glb.chartMapList[0].forEach((key, value) {
+                    s = key[0];
+                  });
+                  return s;
+                }
               case 1:
-                return 'T';
+                {
+                  String s;
+                  glb.chartMapList[1].forEach((key, value) {
+                    s = key[0];
+                  });
+                  return s;
+                }
               case 2:
-                return 'W';
+                {
+                  String s;
+                  glb.chartMapList[2].forEach((key, value) {
+                    s = key[0];
+                  });
+                  return s;
+                }
               case 3:
-                return 'T';
+                {
+                  String s;
+                  glb.chartMapList[3].forEach((key, value) {
+                    s = key[0];
+                  });
+                  return s;
+                }
               case 4:
-                return 'F';
+                {
+                  String s;
+                  glb.chartMapList[4].forEach((key, value) {
+                    s = key[0];
+                  });
+                  return s;
+                }
               case 5:
-                return 'S';
+                {
+                  String s;
+                  glb.chartMapList[5].forEach((key, value) {
+                    s = key[0];
+                  });
+                  return s;
+                }
               case 6:
-                return 'S';
+                {
+                  String s;
+                  glb.chartMapList[6].forEach((key, value) {
+                    s = key[0];
+                  });
+                  return s;
+                }
             }
             return '';
           },

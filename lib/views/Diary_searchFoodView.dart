@@ -8,11 +8,13 @@ import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/views/Diary_showFoodDetailsView.dart';
 import 'package:http/http.dart' as http;
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:date_format/date_format.dart';
 
 class SearchFoodView extends StatefulWidget {
   String mealType;
+  String dt;
 
-  SearchFoodView(this.mealType);
+  SearchFoodView(this.mealType, this.dt);
 
   @override
   _SearchFoodViewState createState() => _SearchFoodViewState();
@@ -102,7 +104,7 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                         ? Center(
                             child: Column(children: [
                               SizedBox(height: 40),
-                              CircularProgressIndicator()
+                              CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A)))
                             ]),
                           )
                         : (initialState == true)
@@ -141,9 +143,12 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                                                             animation,
                                                             anotherAnimation) {
                                                           return ShowFoodDetailsView(
-                                                              initialItems[index - 2],
+                                                              initialItems[
+                                                                  index - 2],
                                                               widget.mealType,
-                                                              true, "100");
+                                                              true,
+                                                              "100",
+                                                              widget.dt);
                                                         },
                                                         transitionDuration:
                                                             Duration(
@@ -225,8 +230,13 @@ class _SearchFoodViewState extends State<SearchFoodView> {
         var currItemMap = initialItems[i];
         String currItemName =
             capitalizeEachWord(currItemMap['description'], true);
-        String currItemCal =
-            currItemMap['foodNutrients'][3]['value'].toString() + " kcal";
+
+        String currItemCal = "0 kcal";
+        currItemMap['foodNutrients'].forEach((value) {
+          if(value['nutrientName'] == "Energy"){
+            currItemCal = value['value'].toString() +" kcal";
+          }
+        });
         temp.add(Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

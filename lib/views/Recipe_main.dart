@@ -56,7 +56,6 @@ class _RecipeState extends State<Recipe> {
   }
 
   void createAllCards() {
-    print("Running createAllCards()");
     List<Widget> lsOuter = [];
     List<Widget> lsInner;
     glb.allCategories.forEach((collectionName, mapOfMealMaps) {
@@ -87,7 +86,7 @@ class _RecipeState extends State<Recipe> {
     return isLoading
         ? Center(
             child: Column(
-                children: [SizedBox(height: 40), CircularProgressIndicator()]),
+                children: [SizedBox(height: 40), CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A)))]),
           )
         : SingleChildScrollView(
             physics: BouncingScrollPhysics(),

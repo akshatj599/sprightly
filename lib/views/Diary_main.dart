@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/caloriesRemaining.dart';
-import 'package:date_format/date_format.dart';
+import 'package:sprightly/widgets/dateSwitcher.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/widgets/diaryMealCard.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
@@ -13,121 +13,122 @@ class Diary extends StatefulWidget {
 }
 
 class _DiaryState extends State<Diary> {
-  DateTime curr;
-  var dt;
   bool isLoading = true;
   int counter = 0;
-  int breakfastCalories = 0;
-  int lunchCalories = 0;
-  int dinnerCalories = 0;
-  int snacksCalories = 0;
-  int exerciseCalories = 0;
+  double breakfastCalories = 0;
+  double lunchCalories = 0;
+  double dinnerCalories = 0;
+  double snacksCalories = 0;
+  double exerciseCalories = 0;
   Map<String, dynamic> breakfastMap = {};
   Map<String, dynamic> lunchMap = {};
   Map<String, dynamic> dinnerMap = {};
   Map<String, dynamic> snackMap = {};
+  Map<String, dynamic> exerciseMap = {};
+  int goal = 0;
+  DateSwitcher dateSwitcher;
+
+  _DiaryState() {
+    dateSwitcher = DateSwitcher(getDiaryFromFB);
+  }
 
   Future<void> getDiaryFromFB() async {
     print("in function");
+    glb.diary_runFbFunc = false;
     setState(() {
       isLoading = true;
     });
+    breakfastCalories = 0;
+    lunchCalories = 0;
+    dinnerCalories = 0;
+    snacksCalories = 0;
+    exerciseCalories = 0;
+    breakfastMap = {};
+    lunchMap = {};
+    dinnerMap = {};
+    snackMap = {};
+    exerciseMap = {};
     DocumentSnapshot doc = await FirebaseFirestore.instance
         .collection("Users")
         .doc(FirebaseAuth.instance.currentUser.email)
         .get();
 
-    Map<String, dynamic> dtDiary = doc.data()['Diary'][formatDate(curr, [D, ', ', M, ' ', dd, ' \'', yy])];
-    print(dt.toString());
+    Map<String, dynamic> dtDiary = doc.data()['Diary'][dateSwitcher.dtMain];
+    print(dateSwitcher.dtMain.toString());
     if (dtDiary != null) {
-      print("Entering here");
-      if (dtDiary["Breakfast"] != null) breakfastMap = dtDiary["Breakfast"];
-      if (dtDiary["Lunch"] != null) lunchMap = dtDiary["Lunch"];
-      if (dtDiary["Dinner"] != null) dinnerMap = dtDiary["Dinner"];
-      if (dtDiary["Snack"] != null) snackMap = dtDiary["Snack"];
+      print("Entering here from Diary_main");
+      if (dtDiary["Breakfast"] != null) {
+        breakfastMap = dtDiary["Breakfast"];
+        breakfastMap.forEach((key, value) {
+          breakfastCalories += value["Total Energy"];
+        });
+      }
+      if (dtDiary["Lunch"] != null) {
+        lunchMap = dtDiary["Lunch"];
+        lunchMap.forEach((key, value) {
+          lunchCalories += value["Total Energy"];
+        });
+      }
+      if (dtDiary["Dinner"] != null) {
+        dinnerMap = dtDiary["Dinner"];
+        dinnerMap.forEach((key, value) {
+          dinnerCalories += value["Total Energy"];
+        });
+      }
+      if (dtDiary["Snack"] != null) {
+        snackMap = dtDiary["Snack"];
+        snackMap.forEach((key, value) {
+          snacksCalories += value["Total Energy"];
+        });
+      }
+      if (dtDiary["Exercise"] != null) {
+        exerciseMap = dtDiary["Exercise"];
+        exerciseMap.forEach((key, value) {
+          exerciseCalories += value;
+        });
+      }
     }
+    goal = doc.data()['Details']['Target Calories'];
     setState(() {
       isLoading = false;
     });
   }
 
-  void changeDate() {
-    curr = DateTime.now().add(Duration(days: counter));
-    if (counter == 0)
-      dt = 'Today';
-    else if (counter == 1)
-      dt = 'Tomorrow';
-    else if (counter == -1)
-      dt = 'Yesterday';
-    else
-      dt = formatDate(curr, [D, ', ', M, ' ', dd, ' \'', yy]);
-  }
-
   @override
   Widget build(BuildContext context) {
-    changeDate();
     if (glb.diary_runFbFunc) {
-      glb.diary_runFbFunc = false;
+      glb.context = context;
       getDiaryFromFB();
     }
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            color: glb.main_background,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                // spreadRadius: 5,
-                blurRadius: 5,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-          width: double.infinity,
-          // padding: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-          margin: EdgeInsets.fromLTRB(5, 10, 5, 0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      counter--;
-                    });
-                  },
-                  child: Text("<",
-                      style: getAppTextStyle(16, Colors.red[400], false))),
-              Text(dt,
-                  style:
-                      getAppTextStyle(16, glb.main_foreground_header, false)),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      counter++;
-                    });
-                  },
-                  child: Text(">",
-                      style: getAppTextStyle(16, Colors.red[400], false)))
-            ],
-          ),
-        ),
-        CaloriesRemaining(),
+        dateSwitcher,
+        CaloriesRemaining(
+            goal,
+            (breakfastCalories +
+                    lunchCalories +
+                    dinnerCalories +
+                    snacksCalories)
+                .round(),
+            exerciseCalories.round()),
         SizedBox(height: 10),
         isLoading
-            ? CircularProgressIndicator()
+            ? CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A)))
             : Expanded(
                 child: SingleChildScrollView(
                   physics: BouncingScrollPhysics(),
                   child: Column(
                     children: [
-                      getDiaryFoodMealCard(
-                          "Breakfast", breakfastCalories, breakfastMap),
-                      getDiaryFoodMealCard("Lunch", lunchCalories, lunchMap),
-                      getDiaryFoodMealCard("Dinner", dinnerCalories, dinnerMap),
-                      getDiaryFoodMealCard("Snack", snacksCalories, snackMap),
-                      getDiaryExerciseMealCard(exerciseCalories),
+                      getDiaryFoodMealCard("Breakfast", breakfastCalories,
+                          breakfastMap, dateSwitcher.dtMain),
+                      getDiaryFoodMealCard("Lunch", lunchCalories, lunchMap,
+                          dateSwitcher.dtMain),
+                      getDiaryFoodMealCard("Dinner", dinnerCalories, dinnerMap,
+                          dateSwitcher.dtMain),
+                      getDiaryFoodMealCard("Snack", snacksCalories, snackMap,
+                          dateSwitcher.dtMain),
+                      getDiaryExerciseMealCard(
+                          exerciseCalories, exerciseMap, dateSwitcher.dtMain),
                     ],
                   ),
                 ),

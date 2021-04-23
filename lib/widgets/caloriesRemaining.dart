@@ -6,16 +6,15 @@ import 'globals.dart' as glb;
 
 class CaloriesRemaining extends StatefulWidget {
   int goal;
-  int food;
-  int exercise;
-  int remaining;
+  int foodCalories;
+  int exerciseCalories;
+  int remainingCalories;
 
-  CaloriesRemaining() {
-    //TODO: Retrieve goal of user & current calories burnt (food & exercise)
-    this.goal = 2000;
-    this.food = 1200;
-    this.exercise = 800;
-    this.remaining = goal - (food + exercise);
+  CaloriesRemaining(this.goal, this.foodCalories, this.exerciseCalories) {
+    this.remainingCalories = (goal - foodCalories) + exerciseCalories;
+    if (this.remainingCalories < 0) {
+      this.remainingCalories = 0;
+    }
   }
 
   @override
@@ -91,7 +90,7 @@ class _CaloriesRemainingState extends State<CaloriesRemaining> {
                     style:
                         getAppTextStyle(16, glb.main_foreground_header, false)),
                 Column(children: [
-                  Text(widget.food.toString(),
+                  Text(widget.foodCalories.toString(),
                       style: getAppTextStyle(
                           16, glb.main_foreground_header, false)),
                   Text("Food",
@@ -102,7 +101,7 @@ class _CaloriesRemainingState extends State<CaloriesRemaining> {
                     style:
                         getAppTextStyle(16, glb.main_foreground_header, false)),
                 Column(children: [
-                  Text(widget.exercise.toString(),
+                  Text(widget.exerciseCalories.toString(),
                       style: getAppTextStyle(
                           16, glb.main_foreground_header, false)),
                   Text("Exercise",
@@ -114,7 +113,7 @@ class _CaloriesRemainingState extends State<CaloriesRemaining> {
                         getAppTextStyle(16, glb.main_foreground_header, false)),
                 Column(children: [
                   Text(
-                    widget.remaining.toString(),
+                    widget.remainingCalories.toString(),
                     style: getAppTextStyle(16, Colors.green, false),
                   ),
                   Text("Remaining",

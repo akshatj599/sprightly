@@ -16,32 +16,48 @@ class ShowFoodDetailsView extends StatefulWidget {
   String foodCategory;
   bool fromSearchFoodView; //true -> searchFoodView, false -> diary
   String weight;
+  String dt;
 
   ShowFoodDetailsView(this.currItemMap, this.foodCategory,
-      this.fromSearchFoodView, this.weight) {
+      this.fromSearchFoodView, this.weight, this.dt) {
     currItemName = capitalizeEachWord(currItemMap['description'], true);
     nutrientList = currItemMap['foodNutrients'];
+    String calories = "0";
+    double caloriesValue = 0.0;
+    String carbs = "0";
+    double carbsValue = 0.0;
+    String fat = "0";
+    double fatValue = 0.0;
+    String protein = "0";
+    double proteinValue = 0.0;
+    nutrientList.forEach((element) {
+      if (element['nutrientName'] == "Energy") {
+        calories = element['value'].toString() +
+            " " +
+            element['unitName'].toString().toLowerCase();
+        caloriesValue = element['value'] + 0.0;
+      } else if (element['nutrientName'] == "Carbohydrate, by difference") {
+        carbs = element['value'].toString() +
+            " " +
+            element['unitName'].toString().toLowerCase();
+        carbsValue = element['value'] + 0.0;
+      } else if (element['nutrientName'] == "Total lipid (fat)") {
+        fat = element['value'].toString() +
+            " " +
+            element['unitName'].toString().toLowerCase();
+        fatValue = element['value'] + 0.0;
+      } else if (element['nutrientName'] == "Protein") {
+        protein = element['value'].toString() +
+            " " +
+            element['unitName'].toString().toLowerCase();
+        proteinValue = element['value'] + 0.0;
+      }
+    });
     nutrientMap = {
-      "Calories: " +
-              nutrientList[3]['value'].toString() +
-              " " +
-              nutrientList[3]['unitName'].toString().toLowerCase():
-          nutrientList[3]['value'] + 0.0,
-      "Carbs: " +
-              nutrientList[2]['value'].toString() +
-              " " +
-              nutrientList[2]['unitName'].toString().toLowerCase():
-          nutrientList[2]['value'] + 0.0,
-      "Fat: " +
-              nutrientList[1]['value'].toString() +
-              " " +
-              nutrientList[1]['unitName'].toString().toLowerCase():
-          nutrientList[1]['value'] + 0.0,
-      "Protein: " +
-              nutrientList[0]['value'].toString() +
-              " " +
-              nutrientList[0]['unitName'].toString().toLowerCase():
-          nutrientList[0]['value'] + 0.0,
+      "Calories: " + calories: caloriesValue,
+      "Carbs: " + carbs: carbsValue,
+      "Fat: " + fat: fatValue,
+      "Protein: " + protein: proteinValue,
     };
   }
 
@@ -63,13 +79,22 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
         finalWeight = 100.0;
       }
       widget.currItemMap["Weight"] = finalWeight;
+      double calories = 0;
+      widget.currItemMap['foodNutrients'].forEach((value) {
+        if (value['nutrientName'] == "Energy") {
+          calories = double.parse(value['value'].toString());
+        }
+      });
+      calories = (calories * (finalWeight / 100));
+      widget.currItemMap["Total Energy"] =
+          double.parse(calories.toStringAsFixed(1));
       FirebaseFirestore fb = FirebaseFirestore.instance;
       await fb
           .collection('Users')
           .doc(FirebaseAuth.instance.currentUser.email)
           .update({
         'Diary.' +
-            formatDate(DateTime.now(), [D, ', ', M, ' ', dd, ' \'', yy]) +
+            widget.dt +
             '.' +
             widget.foodCategory +
             '.' +
@@ -82,7 +107,6 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
               finalWeight.toString() +
               "g",
           context);
-      glb.diary_runFbFunc = true;
     } else
       showSnackBar("Please enter a valid weight", context);
   }
@@ -175,16 +199,7 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                                                           .currentUser.email)
                                                       .update({
                                                     'Diary.' +
-                                                            formatDate(
-                                                                DateTime.now(), [
-                                                              D,
-                                                              ', ',
-                                                              M,
-                                                              ' ',
-                                                              dd,
-                                                              ' \'',
-                                                              yy
-                                                            ]) +
+                                                            widget.dt +
                                                             '.' +
                                                             widget.foodCategory +
                                                             '.' +

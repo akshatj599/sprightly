@@ -74,6 +74,7 @@ class _SignInViewState extends State<SignInView> {
                               vertical: 20, horizontal: 10),
                           decoration: getGradientBoxDecoration(),
                           child: SingleChildScrollView(
+                            physics: BouncingScrollPhysics(),
                             controller: scrollController,
                             child: Column(
                               children: [
@@ -296,7 +297,7 @@ class _SignInViewState extends State<SignInView> {
                                                   width: 20,
                                                   height: 20,
                                                   child:
-                                                      CircularProgressIndicator())
+                                                      CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A))))
                                               : SizedBox(height: 30),
 
                                           //Create an account

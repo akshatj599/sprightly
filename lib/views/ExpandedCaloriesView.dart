@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:sprightly/widgets/dateSwitcher.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:date_format/date_format.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ExpandedCaloriesView extends StatefulWidget {
   @override
@@ -13,31 +16,89 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
   DateTime curr;
   var dt;
   int counter = 0;
-  Map<String, double> mealMap;
-  double breakFastCalories;
-  double lunchCalories;
-  double dinnerCalories;
-  double snackCalories;
-  double totalCalories;
-  double goal;
-  double remainingCalories;
+  bool isLoading = true;
+  Map<String, double> mealMap = {};
+  double breakFastCalories = 0;
+  double lunchCalories = 0;
+  double dinnerCalories = 0;
+  double snackCalories = 0;
+  double totalCalories = 0;
+  int goal = 0;
+  double remainingCalories = 0;
+  double exerciseCalories = 0;
+  DateSwitcher dateSwitcher;
+  bool runFunc = true;
 
-  void getMealCaloriesFromFirebase() {
-    //TODO: Get values from cloud
-    breakFastCalories = 200;
-    lunchCalories = 300;
-    dinnerCalories = 100;
-    snackCalories = 50;
-    totalCalories =
-        breakFastCalories + lunchCalories + dinnerCalories + snackCalories;
-    goal = 1500;
-    remainingCalories = goal - totalCalories;
+  _ExpandedCaloriesViewState() {
+    dateSwitcher = DateSwitcher(getMealCaloriesFromFirebase);
+  }
+
+  void getMealCaloriesFromFirebase() async {
+    setState(() {
+      isLoading = true;
+    });
+    breakFastCalories = 0;
+    lunchCalories = 0;
+    dinnerCalories = 0;
+    snackCalories = 0;
+    exerciseCalories = 0;
     mealMap = {
       'Breakfast': breakFastCalories,
       "Lunch": lunchCalories,
       "Dinner": dinnerCalories,
       "Snacks": snackCalories
     };
+    DocumentSnapshot doc = await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser.email)
+        .get();
+    Map<String, dynamic> dtDiary = doc.data()['Diary'][dateSwitcher.dtMain];
+    print(dateSwitcher.dtMain.toString());
+    if (dtDiary != null) {
+      print("Entering here from CaloriesRemaining");
+      if (dtDiary["Breakfast"] != null) {
+        dtDiary["Breakfast"].forEach((key, value) {
+          breakFastCalories += value["Total Energy"];
+        });
+      }
+      if (dtDiary["Lunch"] != null) {
+        dtDiary["Lunch"].forEach((key, value) {
+          lunchCalories += value["Total Energy"];
+        });
+      }
+      if (dtDiary["Dinner"] != null) {
+        dtDiary["Dinner"].forEach((key, value) {
+          dinnerCalories += value["Total Energy"];
+        });
+      }
+      if (dtDiary["Snack"] != null) {
+        dtDiary["Snack"].forEach((key, value) {
+          snackCalories += value["Total Energy"];
+        });
+      }
+      if (dtDiary["Exercise"] != null) {
+        dtDiary["Exercise"].forEach((key, value) {
+          exerciseCalories += value;
+        });
+      }
+    }
+
+    goal = doc['Details']['Target Calories'];
+    totalCalories =
+        breakFastCalories + lunchCalories + dinnerCalories + snackCalories;
+    remainingCalories = goal - totalCalories + exerciseCalories;
+    if (remainingCalories < 0) {
+      remainingCalories = 0;
+    }
+    mealMap = {
+      'Breakfast': breakFastCalories,
+      "Lunch": lunchCalories,
+      "Dinner": dinnerCalories,
+      "Snacks": snackCalories
+    };
+    setState(() {
+      isLoading = false;
+    });
   }
 
   void changeDate() {
@@ -81,8 +142,10 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
 
   @override
   Widget build(BuildContext context) {
-    getMealCaloriesFromFirebase();
-    changeDate();
+    if (runFunc) {
+      runFunc = false;
+      getMealCaloriesFromFirebase();
+    }
     return Container(
         child: Scaffold(
       backgroundColor: glb.main_scaffold_background,
@@ -94,47 +157,13 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-                color: glb.main_background,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    // spreadRadius: 5,
-                    blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-              ),
-              width: double.infinity,
-              // padding: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-              margin: EdgeInsets.fromLTRB(5, 10, 5, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        setState(() {
-                          counter--;
-                        });
-                      },
-                      child: Text("<",
-                          style: getAppTextStyle(16, Colors.red[400], false))),
-                  Text(dt,
-                      style: getAppTextStyle(
-                          16, glb.main_foreground_header, false)),
-                  TextButton(
-                      onPressed: () {
-                        setState(() {
-                          counter++;
-                        });
-                      },
-                      child: Text(">",
-                          style: getAppTextStyle(16, Colors.red[400], false)))
-                ],
-              ),
-            ),
+            dateSwitcher,
+            isLoading
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 10.0),
+                    child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A))),
+                  )
+                : SizedBox(height: 0),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -174,16 +203,21 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                    makeCard("Breakfast", breakFastCalories.toString(), false,
+                    makeCard("Breakfast", breakFastCalories.toStringAsFixed(1),
+                        false, false),
+                    makeCard("Lunch", lunchCalories.toStringAsFixed(1), false,
                         false),
-                    makeCard("Lunch", lunchCalories.toString(), false, false),
-                    makeCard("Dinner", dinnerCalories.toString(), false, false),
-                    makeCard("Snacks", snackCalories.toString(), false, false),
-                    makeCard("Total Calories", totalCalories.toString(), false,
+                    makeCard("Dinner", dinnerCalories.toStringAsFixed(1), false,
                         false),
+                    makeCard("Snacks", snackCalories.toStringAsFixed(1), false,
+                        false),
+                    makeCard("Exercise", exerciseCalories.toStringAsFixed(1),
+                        false, false),
+                    makeCard("Total Calories", totalCalories.toStringAsFixed(1),
+                        false, false),
                     makeCard("Goal", goal.toString(), false, true),
-                    makeCard("Calories Remaining", remainingCalories.toString(),
-                        true, true),
+                    makeCard("Calories Remaining",
+                        remainingCalories.toStringAsFixed(1), true, true),
                   ],
                 ),
               ),
