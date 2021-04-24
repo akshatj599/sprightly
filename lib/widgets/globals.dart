@@ -21,6 +21,7 @@ Color main_secondary;
 Map<String, dynamic> currentUserDetails = {};
 List<Map<String, num>> chartMapList = [];
 bool diary_runFbFunc = true;
+Image backgroundImage;
 
 int goal = 0;
 double foodCaloriesToday = 0;

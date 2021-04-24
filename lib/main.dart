@@ -5,7 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sprightly/backend/backend.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -16,7 +15,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    glb.switchTheme();  
+    glb.backgroundImage = Image.asset(
+      "images/back_main.jpg",
+      fit: BoxFit.cover,
+      filterQuality: FilterQuality.high,
+    );
+    glb.switchTheme();
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sprightly',

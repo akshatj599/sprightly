@@ -60,10 +60,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
             Container(
               height: double.infinity,
               width: double.infinity,
-              child: Image.asset(
-                "images/back_main.jpg",
-                fit: BoxFit.cover,
-              ),
+              child: glb.backgroundImage,
             ),
             Container(
               height: double.infinity,
