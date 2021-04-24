@@ -46,12 +46,7 @@ class _InputPageState extends State<InputPage> {
                   borderRadius: BorderRadius.circular(10)),
               child: Text(
                 "Calculate Your BMI",
-                style: getAppTextStyle(
-                    18,
-                    glb.dark_theme
-                        ? Colors.grey[900]
-                        : glb.main_foreground_header,
-                    true),
+                style: getAppTextStyle(18, Colors.grey[900], true),
               ),
             ),
             SizedBox(height: 10),
@@ -291,7 +286,7 @@ class _InputPageState extends State<InputPage> {
                             interpretation: calc.getInterpretation(),
                           );
                         },
-                        transitionDuration: Duration(milliseconds: 300),
+                        transitionDuration: Duration(milliseconds: 150),
                         transitionsBuilder:
                             (context, animation, anotherAnimation, child) {
                           return SlideTransition(

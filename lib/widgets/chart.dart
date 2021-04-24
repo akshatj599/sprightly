@@ -45,25 +45,23 @@ class _LineChartSample2State extends State<LineChartSample2> {
           color: glb.main_background),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text("Performance this week",
-                    style:
-                        getAppTextStyle(18, glb.main_foreground_header, true)),
-                IconButton(
-                    icon:
-                        Icon(Icons.refresh, color: glb.main_foreground_header),
-                    onPressed: () {
-                      setState(() {
-                        print("setState for chart called");
-                      });
-                      widget.funcToCall();
-                    })
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(icon: Icon(Icons.refresh, color: Colors.transparent), onPressed: (){}),
+              Text("Performance this week",
+                  style:
+                      getAppTextStyle(18, glb.main_foreground_header, true)),
+              IconButton(
+                  icon:
+                      Icon(Icons.refresh, color: glb.main_foreground_header),
+                  onPressed: () {
+                    setState(() {
+                      print("setState for chart called");
+                    });
+                    widget.funcToCall();
+                  })
+            ],
           ),
           AspectRatio(
             aspectRatio: 1.70,

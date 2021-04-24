@@ -126,7 +126,7 @@ class _SignUpViewState extends State<SignUpView> {
                                 (context, animation, anotherAnimation) {
                               return SprightlyHome(true);
                             },
-                            transitionDuration: Duration(milliseconds: 300),
+                            transitionDuration: Duration(milliseconds: 150),
                             transitionsBuilder:
                                 (context, animation, anotherAnimation, child) {
                               return SlideTransition(
@@ -624,7 +624,7 @@ class _SignUpViewState extends State<SignUpView> {
                                                           transitionDuration:
                                                               Duration(
                                                                   milliseconds:
-                                                                      300),
+                                                                      150),
                                                           transitionsBuilder:
                                                               (context,
                                                                   animation,

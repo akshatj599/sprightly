@@ -31,7 +31,7 @@ class _CaloriesRemainingState extends State<CaloriesRemaining> {
                 pageBuilder: (context, animation, anotherAnimation) {
                   return ExpandedCaloriesView();
                 },
-                transitionDuration: Duration(milliseconds: 300),
+                transitionDuration: Duration(milliseconds: 150),
                 transitionsBuilder:
                     (context, animation, anotherAnimation, child) {
                   return SlideTransition(

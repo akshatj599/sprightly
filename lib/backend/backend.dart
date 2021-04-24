@@ -6,11 +6,11 @@ import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:date_format/date_format.dart';
 
 Future<void> getUserDetailsFromFB() async {
-  FirebaseFirestore.instance
+  DocumentSnapshot doc = await FirebaseFirestore.instance
       .collection('Users')
       .doc(FirebaseAuth.instance.currentUser.email)
-      .get()
-      .then((DocumentSnapshot doc) {
+      .get();
+      
     // Setting global currentUserDetails
     glb.currentUserDetails = doc['Details'];
     glb.currentUserDetails['Email'] = doc.id;
@@ -80,5 +80,4 @@ Future<void> getUserDetailsFromFB() async {
     //     print(key + " : " + value.toString());
     //   });
     // });
-  });
 }

@@ -242,7 +242,7 @@ class _SignInViewState extends State<SignInView> {
                                                               passwordController
                                                                   .text);
                                                   print("User Signed In");
-                                                  getUserDetailsFromFB();
+                                                  await getUserDetailsFromFB();
                                                 } catch (error) {
                                                   showSnackBar(
                                                       error.message, context);
@@ -263,7 +263,7 @@ class _SignInViewState extends State<SignInView> {
                                                         transitionDuration:
                                                             Duration(
                                                                 milliseconds:
-                                                                    300),
+                                                                    150),
                                                         transitionsBuilder:
                                                             (context,
                                                                 animation,
@@ -326,7 +326,7 @@ class _SignInViewState extends State<SignInView> {
                                                             transitionDuration:
                                                                 Duration(
                                                                     milliseconds:
-                                                                        300),
+                                                                        150),
                                                             transitionsBuilder:
                                                                 (context,
                                                                     animation,

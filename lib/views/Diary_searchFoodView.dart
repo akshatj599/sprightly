@@ -153,7 +153,7 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                                                         transitionDuration:
                                                             Duration(
                                                                 milliseconds:
-                                                                    300),
+                                                                    150),
                                                         transitionsBuilder:
                                                             (context,
                                                                 animation,

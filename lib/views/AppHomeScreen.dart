@@ -25,7 +25,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                 pageBuilder: (context, animation, anotherAnimation) {
                   return SprightlyHome(false);
                 },
-                transitionDuration: Duration(milliseconds: 300),
+                transitionDuration: Duration(milliseconds: 150),
                 transitionsBuilder:
                     (context, animation, anotherAnimation, child) {
                   return SlideTransition(
@@ -92,7 +92,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                 pageBuilder: (context, animation, anotherAnimation) {
                   return SignInView();
                 },
-                transitionDuration: Duration(milliseconds: 300),
+                transitionDuration: Duration(milliseconds: 150),
                 transitionsBuilder:
                     (context, animation, anotherAnimation, child) {
                   return SlideTransition(
@@ -122,7 +122,7 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                 pageBuilder: (context, animation, anotherAnimation) {
                   return SignUpView();
                 },
-                transitionDuration: Duration(milliseconds: 300),
+                transitionDuration: Duration(milliseconds: 150),
                 transitionsBuilder:
                     (context, animation, anotherAnimation, child) {
                   return SlideTransition(

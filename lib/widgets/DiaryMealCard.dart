@@ -16,7 +16,7 @@ Column getDiaryFoodMealCard(
                   pageBuilder: (context, animation, anotherAnimation) {
                     return SearchFoodView(mealName, dt);
                   },
-                  transitionDuration: Duration(milliseconds: 300),
+                  transitionDuration: Duration(milliseconds: 150),
                   transitionsBuilder:
                       (context, animation, anotherAnimation, child) {
                     return SlideTransition(
@@ -103,7 +103,7 @@ Column getDiaryExerciseMealCard(
                   pageBuilder: (context, animation, anotherAnimation) {
                     return SearchExerciseView(dt);
                   },
-                  transitionDuration: Duration(milliseconds: 300),
+                  transitionDuration: Duration(milliseconds: 150),
                   transitionsBuilder:
                       (context, animation, anotherAnimation, child) {
                     return SlideTransition(
@@ -193,7 +193,7 @@ List<Widget> makeList(
               return ShowFoodDetailsView(mealMap[key], mealName, false,
                   mealMap[key]["Weight"].toString(), dt);
             },
-            transitionDuration: Duration(milliseconds: 300),
+            transitionDuration: Duration(milliseconds: 150),
             transitionsBuilder: (context, animation, anotherAnimation, child) {
               return SlideTransition(
                 position: Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))

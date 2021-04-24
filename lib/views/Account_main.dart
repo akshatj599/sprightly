@@ -38,8 +38,9 @@ class _AccountViewState extends State<AccountView> {
       userName = glb.currentUserDetails['Username'];
       gender = glb.currentUserDetails['Gender'];
       emailId = glb.currentUserDetails['Email'];
-      goal_weight = glb.currentUserDetails['Target Weight']+0.0 ??
-          glb.currentUserDetails['Weight']+0.0;
+      var temp = glb.currentUserDetails['Target Weight'] ??
+          glb.currentUserDetails['Weight'];
+      goal_weight = temp + 0.0;
       goal_calories = glb.currentUserDetails['Target Calories'];
     }
     setState(() {
@@ -54,7 +55,10 @@ class _AccountViewState extends State<AccountView> {
       getDataFromFirebase();
     }
     return isLoading
-        ? Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A))))
+        ? Center(
+            child: CircularProgressIndicator(
+                valueColor:
+                    new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A))))
         : SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Padding(
@@ -62,7 +66,7 @@ class _AccountViewState extends State<AccountView> {
               child: Column(
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                    padding: EdgeInsets.fromLTRB(10, 15, 10, 0),
                     margin: EdgeInsets.only(bottom: 10),
                     width: double.infinity,
                     decoration: BoxDecoration(
@@ -138,6 +142,8 @@ class _AccountViewState extends State<AccountView> {
                             buttonTitle: 'Sign Out',
                             onTap: () {
                               FirebaseAuth.instance.signOut();
+                              if(glb.dark_theme)
+                                glb.switchTheme();
                               glb.currentUserDetails = {};
                               print("User Signed Out");
                               Navigator.pushReplacement(
@@ -182,7 +188,7 @@ class _AccountViewState extends State<AccountView> {
                                 child: Column(
                                   children: [
                                     Text(
-                                      goal_weight.toString() + " kg",
+                                      goal_weight.toStringAsFixed(0) + " kg",
                                       style: getAppTextStyle(
                                           40, glb.main_foreground_header, true),
                                     ),
