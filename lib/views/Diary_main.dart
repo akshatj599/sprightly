@@ -52,7 +52,6 @@ class _DiaryState extends State<Diary> {
         .get();
 
     Map<String, dynamic> dtDiary = doc.data()['Diary'][dateSwitcher.dtMain];
-    print(dateSwitcher.dtMain.toString() + " - entering here from Diary_main");
     if (dtDiary != null) {
       if (dtDiary["Breakfast"] != null) {
         breakfastMap = dtDiary["Breakfast"];

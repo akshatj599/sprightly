@@ -46,7 +46,7 @@ class _SearchExerciseViewState extends State<SearchExerciseView> {
             "Exercise Added / Updated: " +
                 exerciseNameController.text +
                 " - " +
-                calorieEditingController.text,
+                calorieEditingController.text + " kcal",
             context);
       } else {
         showSnackBar("Please enter a valid calorie count", context);

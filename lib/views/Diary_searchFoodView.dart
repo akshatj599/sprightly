@@ -103,7 +103,9 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                         ? Center(
                             child: Column(children: [
                               SizedBox(height: 40),
-                              CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Color(0xFFEC407A)))
+                              CircularProgressIndicator(
+                                  valueColor: new AlwaysStoppedAnimation<Color>(
+                                      Color(0xFFEC407A)))
                             ]),
                           )
                         : (initialState == true)
@@ -173,8 +175,10 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                                                           );
                                                         }))
                                                     .then((value) {
+                                                  glb.resetCounter = false;
                                                   glb.bnb.onTap(
                                                       glb.bnb.currentIndex);
+                                                  glb.resetCounter = true;
                                                 });
                                               },
                                               child: Container(
@@ -191,13 +195,7 @@ class _SearchFoodViewState extends State<SearchFoodView> {
                                                 child: finalItems[index],
                                               ),
                                             )
-                                          : (index == 0
-                                              ? Text(" Results (per 100 g):",
-                                                  style: getAppTextStyle(
-                                                      18,
-                                                      glb.main_foreground_header,
-                                                      true))
-                                              : finalItems[index]);
+                                          : finalItems[index];
                                     }),
                               )
                   ],
@@ -221,7 +219,8 @@ class _SearchFoodViewState extends State<SearchFoodView> {
     if (response.statusCode == 200) {
       initialItems = json.decode(response.body.toString())['foods'];
       List<Widget> temp = [];
-      temp.add(Text(""));
+      temp.add(Text(" Results (per 100 g):",
+          style: getAppTextStyle(18, glb.main_foreground_header, true)));
       temp.add(SizedBox(height: 20));
 
       //loop
@@ -232,8 +231,8 @@ class _SearchFoodViewState extends State<SearchFoodView> {
 
         String currItemCal = "0 kcal";
         currItemMap['foodNutrients'].forEach((value) {
-          if(value['nutrientName'] == "Energy"){
-            currItemCal = value['value'].toString() +" kcal";
+          if (value['nutrientName'] == "Energy") {
+            currItemCal = value['value'].toString() + " kcal";
           }
         });
         temp.add(Row(

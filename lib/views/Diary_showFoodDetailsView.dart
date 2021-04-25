@@ -87,8 +87,7 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
       calories = (calories * (finalWeight / 100));
       widget.currItemMap["Total Energy"] =
           double.parse(calories.toStringAsFixed(1));
-      print(
-        "Diary." +
+      print("Diary." +
           // widget.dt +
           '.' +
           widget.foodCategory +
@@ -157,9 +156,13 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(widget.currItemName,
-                                        style: getAppTextStyle(
-                                            18, Colors.black, true)),
+                                    Expanded(
+                                      child: Container(
+                                        child: Text(widget.currItemName,
+                                            style: getAppTextStyle(
+                                                18, Colors.black, true)),
+                                      ),
+                                    ),
                                     IconButton(
                                         icon: Icon(
                                           Icons.delete,

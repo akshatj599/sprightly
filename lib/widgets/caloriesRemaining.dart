@@ -42,7 +42,9 @@ class _CaloriesRemainingState extends State<CaloriesRemaining> {
                   );
                 }))
             .then((value) {
+          glb.resetCounter = false;
           glb.bnb.onTap(glb.bnb.currentIndex);
+          glb.resetCounter = true;
         });
       },
       child: Container(

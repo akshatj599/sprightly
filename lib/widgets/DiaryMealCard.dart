@@ -8,7 +8,6 @@ import 'package:sprightly/widgets/widgets.dart';
 
 Column getDiaryFoodMealCard(
     String mealName, double calories, Map<String, dynamic> mealMap, String dt) {
-  print(dt);
   List<Widget> ls = [
     GestureDetector(
         onTap: () async {
@@ -28,11 +27,15 @@ Column getDiaryFoodMealCard(
                     );
                   }))
               .then((value) {
+            glb.resetCounter = false;
             glb.bnb.onTap(glb.bnb.currentIndex);
+            glb.resetCounter = true;
           });
         },
-        child:
-            Text("+ Add Food", style: getAppTextStyle(16, Colors.black, false)))
+        child: Container(
+            width: double.infinity,
+            child: Text("+ Add Food",
+                style: getAppTextStyle(16, Colors.black, false))))
   ];
   List<Widget> finalList = makeList(ls, mealName, mealMap, dt);
   return Column(
@@ -115,11 +118,16 @@ Column getDiaryExerciseMealCard(
                     );
                   }))
               .then((value) {
+                glb.resetCounter = false;
             glb.bnb.onTap(glb.bnb.currentIndex);
+            glb.resetCounter = true;
           });
         },
-        child: Text("+ Add Exercise",
-            style: getAppTextStyle(16, Colors.black, false)))
+        child: Container(
+          width: double.infinity,
+          child: Text("+ Add Exercise",
+              style: getAppTextStyle(16, Colors.black, false)),
+        ))
   ];
   List<Widget> finalList = makeListForExercise(ls, exerciseMap);
   return Column(
@@ -206,7 +214,9 @@ List<Widget> makeList(
                   );
                 }))
             .then((value) {
+              glb.resetCounter = false;
           glb.bnb.onTap(glb.bnb.currentIndex);
+          glb.resetCounter = true;
         });
       },
       child: Row(
