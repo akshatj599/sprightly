@@ -72,14 +72,14 @@ class _AccountViewState extends State<AccountView> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       color: glb.main_background,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          // spreadRadius: 5,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.black.withOpacity(0.1),
+                      //     // spreadRadius: 5,
+                      //     blurRadius: 5,
+                      //     offset: Offset(0, 3), // changes position of shadow
+                      //   ),
+                      // ],
                     ),
                     child: Column(
                       children: [
@@ -162,14 +162,14 @@ class _AccountViewState extends State<AccountView> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       color: glb.main_background,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          // spreadRadius: 5,
-                          blurRadius: 5,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.black.withOpacity(0.1),
+                      //     // spreadRadius: 5,
+                      //     blurRadius: 5,
+                      //     offset: Offset(0, 3), // changes position of shadow
+                      //   ),
+                      // ],
                     ),
                     child: Column(
                       children: [

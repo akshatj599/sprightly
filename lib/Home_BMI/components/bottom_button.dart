@@ -27,6 +27,14 @@ class BottomButton extends StatelessWidget {
         padding: EdgeInsets.all(10),
         width: MediaQuery.of(context).size.width / 2,
         decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.1),
+                // spreadRadius: 5,
+                blurRadius: 5,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
             color: glb.dark_theme ? Colors.purple[900] : kBottomContainerColour,
             borderRadius: BorderRadius.circular(10)),
       ),

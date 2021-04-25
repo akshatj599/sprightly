@@ -38,6 +38,14 @@ class _ResultsPageState extends State<ResultsPage> {
               margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               alignment: Alignment.center,
               decoration: BoxDecoration(
+          //       boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.1),
+          //     // spreadRadius: 5,
+          //     blurRadius: 5,
+          //     offset: Offset(0, 3), // changes position of shadow
+          //   ),
+          // ],
                   color: glb.main_background,
                   borderRadius: BorderRadius.circular(10)),
               child: Text(

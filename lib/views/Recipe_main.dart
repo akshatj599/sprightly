@@ -100,6 +100,14 @@ class _RecipeState extends State<Recipe> {
       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       decoration: BoxDecoration(
+        // boxShadow: [
+        //     BoxShadow(
+        //       color: Colors.black.withOpacity(0.1),
+        //       // spreadRadius: 5,
+        //       blurRadius: 5,
+        //       offset: Offset(0, 3), // changes position of shadow
+        //     ),
+        //   ],
           color: glb.main_background, borderRadius: BorderRadius.circular(10)),
       child: Text(
         category,
@@ -124,6 +132,14 @@ class _RecipeState extends State<Recipe> {
       child: Container(
         margin: EdgeInsets.only(left: 5, right: 5),
         decoration: BoxDecoration(
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.1),
+          //     // spreadRadius: 5,
+          //     blurRadius: 5,
+          //     offset: Offset(0, 3), // changes position of shadow
+          //   ),
+          // ],
             borderRadius: BorderRadius.all(Radius.circular(10)),
             color: glb.main_background),
         width: 150,

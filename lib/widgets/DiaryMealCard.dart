@@ -44,14 +44,14 @@ Column getDiaryFoodMealCard(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15)),
           color: glb.main_background,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              // spreadRadius: 5,
-              blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.1),
+          //     // spreadRadius: 5,
+          //     blurRadius: 5,
+          //     offset: Offset(0, 3), // changes position of shadow
+          //   ),
+          // ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,14 +75,14 @@ Column getDiaryFoodMealCard(
               bottomLeft: Radius.circular(15),
               bottomRight: Radius.circular(15)),
           color: glb.main_secondary,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              // spreadRadius: 5,
-              blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.1),
+          //     // spreadRadius: 5,
+          //     blurRadius: 5,
+          //     offset: Offset(0, 3), // changes position of shadow
+          //   ),
+          // ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,14 +131,14 @@ Column getDiaryExerciseMealCard(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15), topRight: Radius.circular(15)),
           color: glb.main_background,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              // spreadRadius: 5,
-              blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.1),
+          //     // spreadRadius: 5,
+          //     blurRadius: 5,
+          //     offset: Offset(0, 3), // changes position of shadow
+          //   ),
+          // ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -161,14 +161,14 @@ Column getDiaryExerciseMealCard(
               bottomLeft: Radius.circular(15),
               bottomRight: Radius.circular(15)),
           color: glb.main_secondary,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              // spreadRadius: 5,
-              blurRadius: 5,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.1),
+          //     // spreadRadius: 5,
+          //     blurRadius: 5,
+          //     offset: Offset(0, 3), // changes position of shadow
+          //   ),
+          // ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
