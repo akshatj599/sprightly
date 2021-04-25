@@ -38,17 +38,8 @@ class _DateSwitcherState extends State<DateSwitcher> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(15)),
         color: glb.main_background,
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Colors.black.withOpacity(0.1),
-        //     // spreadRadius: 5,
-        //     blurRadius: 5,
-        //     offset: Offset(0, 3), // changes position of shadow
-        //   ),
-        // ],
       ),
       width: double.infinity,
-      // padding: EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       margin: EdgeInsets.fromLTRB(5, 10, 5, 0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

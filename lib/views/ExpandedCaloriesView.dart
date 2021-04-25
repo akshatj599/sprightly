@@ -127,7 +127,7 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
     if (runFunc) {
       runFunc = false;
       getMealCaloriesFromFirebase();
-    }
+    }  
     dateSwitcher = DateSwitcher(getMealCaloriesFromFirebase);
     return Container(
         child: Scaffold(

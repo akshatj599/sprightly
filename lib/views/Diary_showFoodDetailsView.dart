@@ -87,6 +87,13 @@ class _ShowFoodDetailsViewState extends State<ShowFoodDetailsView> {
       calories = (calories * (finalWeight / 100));
       widget.currItemMap["Total Energy"] =
           double.parse(calories.toStringAsFixed(1));
+      print(
+        "Diary." +
+          // widget.dt +
+          '.' +
+          widget.foodCategory +
+          '.' +
+          widget.currItemName);
       FirebaseFirestore fb = FirebaseFirestore.instance;
       await fb
           .collection('Users')

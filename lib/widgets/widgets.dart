@@ -15,8 +15,13 @@ TextStyle getAppTextStyle(double size, Color color, bool isBold) {
 }
 
 void showSnackBar(String textToDisplay, BuildContext context) {
-  ScaffoldMessenger.of(context)
-      .showSnackBar(SnackBar(content: Text(textToDisplay)));
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(
+      textToDisplay,
+      style: getAppTextStyle(14, Colors.white, false),      
+    ),
+    backgroundColor: Colors.blue[600],
+  ));
 }
 
 String capitalizeEachWord(String input, bool doLower) {

@@ -185,7 +185,7 @@ class _SignInViewState extends State<SignInView> {
                                                       context,
                                                       CustomSnackBar.success(
                                                         message:
-                                                            "Verification link sent at " +
+                                                            "Password reset link sent at " +
                                                                 emailController
                                                                     .text,
                                                         textStyle:

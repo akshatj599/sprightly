@@ -8,6 +8,7 @@ import 'package:sprightly/widgets/widgets.dart';
 
 Column getDiaryFoodMealCard(
     String mealName, double calories, Map<String, dynamic> mealMap, String dt) {
+  print(dt);
   List<Widget> ls = [
     GestureDetector(
         onTap: () async {
@@ -188,19 +189,22 @@ List<Widget> makeList(
     ));
     ls.add(GestureDetector(
       onTap: () async {
-        await Navigator.of(glb.context).push(PageRouteBuilder(
-            pageBuilder: (context, animation, anotherAnimation) {
-              return ShowFoodDetailsView(mealMap[key], mealName, false,
-                  mealMap[key]["Weight"].toString(), dt);
-            },
-            transitionDuration: Duration(milliseconds: 150),
-            transitionsBuilder: (context, animation, anotherAnimation, child) {
-              return SlideTransition(
-                position: Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
-                    .animate(animation),
-                child: child,
-              );
-            }))
+        await Navigator.of(glb.context)
+            .push(PageRouteBuilder(
+                pageBuilder: (context, animation, anotherAnimation) {
+                  return ShowFoodDetailsView(mealMap[key], mealName, false,
+                      mealMap[key]["Weight"].toString(), dt);
+                },
+                transitionDuration: Duration(milliseconds: 150),
+                transitionsBuilder:
+                    (context, animation, anotherAnimation, child) {
+                  return SlideTransition(
+                    position:
+                        Tween(begin: Offset(1.0, 0.0), end: Offset(0.0, 0.0))
+                            .animate(animation),
+                    child: child,
+                  );
+                }))
             .then((value) {
           glb.bnb.onTap(glb.bnb.currentIndex);
         });
