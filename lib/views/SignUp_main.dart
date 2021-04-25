@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:sprightly/Home_BMI/components/bottom_button.dart';
-import 'package:sprightly/views/Sprightly.dart';
-import 'package:sprightly/widgets/widgets.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:sprightly/views/SignIn_main.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:sprightly/Home_BMI/components/bottom_button.dart';
+import 'package:sprightly/views/SignIn_main.dart';
+import 'package:sprightly/views/Sprightly.dart';
+import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:sprightly/widgets/widgets.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:sprightly/widgets/globals.dart' as glb;
 
 class SignUpView extends StatefulWidget {
   @override

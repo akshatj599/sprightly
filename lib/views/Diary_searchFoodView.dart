@@ -4,15 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/views/Diary_showFoodDetailsView.dart';
 import 'package:http/http.dart' as http;
+import 'package:sprightly/views/Diary_showFoodDetailsView.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
-import 'package:date_format/date_format.dart';
+import 'package:sprightly/widgets/widgets.dart';
 
 class SearchFoodView extends StatefulWidget {
-  String mealType;
-  String dt;
+  final String mealType;
+  final String dt;
 
   SearchFoodView(this.mealType, this.dt);
 

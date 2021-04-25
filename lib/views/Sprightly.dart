@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/views/Account_main.dart';
-import 'package:sprightly/views/Recipe_main.dart';
-import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/views/Home_main.dart';
 import 'package:sprightly/views/Diary_main.dart';
+import 'package:sprightly/views/Home_main.dart';
+import 'package:sprightly/views/Recipe_main.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:sprightly/widgets/widgets.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
@@ -77,6 +77,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
       onTap: (index) {
         setState(() {
           _navigationBarCurrIndex = index;
+          glb.counter = 0;
         });
       },
       type: BottomNavigationBarType.fixed,

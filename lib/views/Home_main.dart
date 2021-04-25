@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sprightly/Home_BMI/screens/input_page.dart';
+import 'package:sprightly/backend/backend.dart';
 import 'package:sprightly/widgets/caloriesRemaining.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
-import 'package:sprightly/backend/backend.dart';
 
 class Home extends StatefulWidget {
   @override

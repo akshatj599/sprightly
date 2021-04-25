@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sprightly/views/Diary_showFoodDetailsView.dart';
-import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/views/Diary_searchFoodView.dart';
 import 'package:sprightly/views/Diary_searchExerciseView.dart';
+import 'package:sprightly/views/Diary_searchFoodView.dart';
+import 'package:sprightly/views/Diary_showFoodDetailsView.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:sprightly/widgets/widgets.dart';
 
 Column getDiaryFoodMealCard(
     String mealName, double calories, Map<String, dynamic> mealMap, String dt) {

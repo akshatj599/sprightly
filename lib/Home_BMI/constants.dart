@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/widgets/globals.dart' as glb;
 
 double kBottomContainerHeight = 80.0;
 Color kBottomContainerColour = Color(0xFFEC407A); //Colors.pink[400]

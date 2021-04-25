@@ -1,10 +1,9 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:date_format/date_format.dart';
 
 class DateSwitcher extends StatefulWidget {
-  int counter = 0;
   DateTime curr;
   String dtToDisplay;
   String dtMain;
@@ -18,12 +17,12 @@ class DateSwitcher extends StatefulWidget {
 
 class _DateSwitcherState extends State<DateSwitcher> {
   void changeDate() {
-    widget.curr = DateTime.now().add(Duration(days: widget.counter));
-    if (widget.counter == 0)
+    widget.curr = DateTime.now().add(Duration(days: glb.counter));
+    if (glb.counter == 0)
       widget.dtToDisplay = 'Today';
-    else if (widget.counter == 1)
+    else if (glb.counter == 1)
       widget.dtToDisplay = 'Tomorrow';
-    else if (widget.counter == -1)
+    else if (glb.counter == -1)
       widget.dtToDisplay = 'Yesterday';
     else
       widget.dtToDisplay =
@@ -58,7 +57,7 @@ class _DateSwitcherState extends State<DateSwitcher> {
               onPressed: () {
                 widget.funcToCall();
                 setState(() {
-                  widget.counter--;
+                  glb.counter--;
                 });
               },
               child: Text("<",
@@ -67,10 +66,10 @@ class _DateSwitcherState extends State<DateSwitcher> {
               style: getAppTextStyle(16, glb.main_foreground_header, false)),
           TextButton(
               onPressed: () {
-                if (widget.counter < 0) {
+                if (glb.counter < 0) {
                   widget.funcToCall();
                   setState(() {
-                    widget.counter++;
+                    glb.counter++;
                   });
                 }
               },

@@ -1,8 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
-import 'package:sprightly/backend/backend.dart';
+import 'package:sprightly/widgets/widgets.dart';
 
 class LineChartSample2 extends StatefulWidget {
   Function funcToCall;

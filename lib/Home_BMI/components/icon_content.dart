@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sprightly/Home_BMI/constants.dart';
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/widgets/globals.dart' as glb;
 
 class IconContent extends StatelessWidget {
   IconContent({this.icon, this.label, this.iconColor});

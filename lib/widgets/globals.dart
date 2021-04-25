@@ -1,10 +1,7 @@
 library my_prj.globals;
 
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:sprightly/views/Sprightly.dart';
-import 'package:sprightly/views/Recipe_main.dart';
-import 'package:date_format/date_format.dart';
+import 'package:flutter/material.dart';
 
 BuildContext context;
 BottomNavigationBar bnb;
@@ -22,6 +19,7 @@ Map<String, dynamic> currentUserDetails = {};
 List<Map<String, num>> chartMapList = [];
 bool diary_runFbFunc = true;
 Image backgroundImage;
+int counter = 0;
 
 int goal = 0;
 double foodCaloriesToday = 0;
