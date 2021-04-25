@@ -1,11 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:sprightly/widgets/dateSwitcher.dart';
-import 'package:sprightly/widgets/widgets.dart';
-import 'package:date_format/date_format.dart';
-import 'package:pie_chart/pie_chart.dart';
-import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:date_format/date_format.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
+import 'package:sprightly/widgets/dateSwitcher.dart';
+import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:sprightly/widgets/widgets.dart';
 
 class ExpandedCaloriesView extends StatefulWidget {
   @override

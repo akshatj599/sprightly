@@ -1,12 +1,10 @@
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:http/http.dart' as http;
 import 'package:sprightly/views/Recipe_showFullRecipe.dart';
-import 'dart:convert';
 import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/backend/backend.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Recipe extends StatefulWidget {
   @override

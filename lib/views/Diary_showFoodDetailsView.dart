@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:sprightly/widgets/widgets.dart';
-import 'package:pie_chart/pie_chart.dart';
-import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:date_format/date_format.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:sprightly/widgets/widgets.dart';
 
 class ShowFoodDetailsView extends StatefulWidget {
   Map currItemMap;

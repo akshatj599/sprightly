@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sprightly/Home_BMI/constants.dart';
-import 'package:sprightly/Home_BMI/components/reusable_card.dart';
 import 'package:sprightly/Home_BMI/components/bottom_button.dart';
-import 'package:sprightly/widgets/widgets.dart';
+import 'package:sprightly/Home_BMI/components/reusable_card.dart';
+import 'package:sprightly/Home_BMI/constants.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:sprightly/widgets/widgets.dart';
 
 class ResultsPage extends StatefulWidget {
   ResultsPage(

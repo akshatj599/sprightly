@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sprightly/views/ExpandedCaloriesView.dart';
-import 'package:sprightly/views/Sprightly.dart';
 import 'package:sprightly/widgets/widgets.dart';
+
 import 'globals.dart' as glb;
 
 class CaloriesRemaining extends StatefulWidget {

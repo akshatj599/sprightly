@@ -1,12 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:sprightly/views/Sprightly.dart';
-import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:sprightly/Home_BMI/components/bottom_button.dart';
 import 'package:sprightly/views/SignIn_main.dart';
 import 'package:sprightly/views/SignUp_main.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:sprightly/views/Sprightly.dart';
+import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:sprightly/backend/backend.dart';
 
 class AppHomeScreen extends StatefulWidget {
   @override

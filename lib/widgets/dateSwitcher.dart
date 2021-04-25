@@ -1,7 +1,7 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:date_format/date_format.dart';
 
 class DateSwitcher extends StatefulWidget {
   int counter = 0;

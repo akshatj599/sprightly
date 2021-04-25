@@ -1,11 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sprightly/widgets/caloriesRemaining.dart';
 import 'package:sprightly/widgets/dateSwitcher.dart';
-import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/widgets/diaryMealCard.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class Diary extends StatefulWidget {
   @override
@@ -33,7 +32,6 @@ class _DiaryState extends State<Diary> {
   }
 
   Future<void> getDiaryFromFB() async {
-    print("in function");
     glb.diary_runFbFunc = false;
     setState(() {
       isLoading = true;
@@ -54,9 +52,8 @@ class _DiaryState extends State<Diary> {
         .get();
 
     Map<String, dynamic> dtDiary = doc.data()['Diary'][dateSwitcher.dtMain];
-    print(dateSwitcher.dtMain.toString());
+    print(dateSwitcher.dtMain.toString()+" - entering here from Diary_main");
     if (dtDiary != null) {
-      print("Entering here from Diary_main");
       if (dtDiary["Breakfast"] != null) {
         breakfastMap = dtDiary["Breakfast"];
         breakfastMap.forEach((key, value) {

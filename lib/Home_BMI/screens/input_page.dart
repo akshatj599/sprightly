@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sprightly/Home_BMI/calculator_brain.dart';
+import 'package:sprightly/Home_BMI/components/bottom_button.dart';
 import 'package:sprightly/Home_BMI/components/icon_content.dart';
 import 'package:sprightly/Home_BMI/components/reusable_card.dart';
-import 'package:sprightly/Home_BMI/constants.dart';
-import 'package:sprightly/Home_BMI/screens/results_page.dart';
-import 'package:sprightly/Home_BMI/components/bottom_button.dart';
 import 'package:sprightly/Home_BMI/components/round_icon_button.dart';
-import 'package:sprightly/Home_BMI/calculator_brain.dart';
-import 'package:sprightly/widgets/widgets.dart';
+import 'package:sprightly/Home_BMI/screens/results_page.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
-
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:sprightly/widgets/widgets.dart';
 
 enum Gender {
   male,

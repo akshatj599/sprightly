@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sprightly/views/AppHomeScreen.dart';
-import 'package:sprightly/views/Home_main.dart';
 import 'package:sprightly/widgets/chart.dart';
 import 'package:sprightly/widgets/widgets.dart';
-import 'package:fl_chart/fl_chart.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:sprightly/Home_BMI/components/bottom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,8 +16,8 @@ class _AccountViewState extends State<AccountView> {
   String userName;
   String gender;
   String emailId;
-  double goal_weight;
-  int goal_calories;
+  double goalWeight;
+  int goalCalories;
   bool isLoading = true;
   bool callFunction = true;
 
@@ -31,8 +29,8 @@ class _AccountViewState extends State<AccountView> {
     userName = "Not found";
     gender = "Not found";
     emailId = "Not found";
-    goal_weight = 0;
-    goal_calories = 0;
+    goalWeight = 0;
+    goalCalories = 0;
     await getUserDetailsFromFB();
     if (glb.currentUserDetails.isNotEmpty) {
       userName = glb.currentUserDetails['Username'];
@@ -40,8 +38,8 @@ class _AccountViewState extends State<AccountView> {
       emailId = glb.currentUserDetails['Email'];
       var temp = glb.currentUserDetails['Target Weight'] ??
           glb.currentUserDetails['Weight'];
-      goal_weight = temp + 0.0;
-      goal_calories = glb.currentUserDetails['Target Calories'];
+      goalWeight = temp + 0.0;
+      goalCalories = glb.currentUserDetails['Target Calories'];
     }
     setState(() {
       isLoading = false;
@@ -188,7 +186,7 @@ class _AccountViewState extends State<AccountView> {
                                 child: Column(
                                   children: [
                                     Text(
-                                      goal_weight.toStringAsFixed(0) + " kg",
+                                      goalWeight.toStringAsFixed(0) + " kg",
                                       style: getAppTextStyle(
                                           40, glb.main_foreground_header, true),
                                     ),
@@ -213,7 +211,7 @@ class _AccountViewState extends State<AccountView> {
                                 child: Column(
                                   children: [
                                     Text(
-                                      goal_calories.toString(),
+                                      goalCalories.toString(),
                                       style: getAppTextStyle(
                                           40, glb.main_foreground_header, true),
                                     ),
