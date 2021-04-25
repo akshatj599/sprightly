@@ -15,7 +15,6 @@ class ExpandedCaloriesView extends StatefulWidget {
 class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
   DateTime curr;
   var dt;
-  int counter = 0;
   bool isLoading = true;
   Map<String, double> mealMap = {};
   double breakFastCalories = 0;
@@ -99,19 +98,6 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
     setState(() {
       isLoading = false;
     });
-  }
-
-  void changeDate() {
-    curr = DateTime.now();
-    var temp = curr.add(Duration(days: counter));
-    if (counter == 0)
-      dt = 'Today';
-    else if (counter == 1)
-      dt = 'Tomorrow';
-    else if (counter == -1)
-      dt = 'Yesterday';
-    else
-      dt = formatDate(temp, [D, ', ', M, ' ', dd, ' \'', yy]);
   }
 
   Container makeCard(

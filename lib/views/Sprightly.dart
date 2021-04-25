@@ -77,6 +77,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
       onTap: (index) {
         setState(() {
           _navigationBarCurrIndex = index;
+          glb.counter = 0;
         });
       },
       type: BottomNavigationBarType.fixed,

@@ -13,7 +13,6 @@ class Diary extends StatefulWidget {
 
 class _DiaryState extends State<Diary> {
   bool isLoading = true;
-  int counter = 0;
   double breakfastCalories = 0;
   double lunchCalories = 0;
   double dinnerCalories = 0;
@@ -27,9 +26,6 @@ class _DiaryState extends State<Diary> {
   int goal = 0;
   DateSwitcher dateSwitcher;
 
-  _DiaryState() {
-    dateSwitcher = DateSwitcher(getDiaryFromFB);
-  }
 
   Future<void> getDiaryFromFB() async {
     glb.diary_runFbFunc = false;
@@ -97,6 +93,7 @@ class _DiaryState extends State<Diary> {
       glb.context = context;
       getDiaryFromFB();
     }
+    dateSwitcher = DateSwitcher(getDiaryFromFB);
     return Column(
       children: [
         dateSwitcher,
