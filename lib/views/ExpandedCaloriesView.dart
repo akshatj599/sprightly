@@ -28,10 +28,6 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
   DateSwitcher dateSwitcher;
   bool runFunc = true;
 
-  _ExpandedCaloriesViewState() {
-    dateSwitcher = DateSwitcher(getMealCaloriesFromFirebase);
-  }
-
   void getMealCaloriesFromFirebase() async {
     setState(() {
       isLoading = true;
@@ -132,6 +128,7 @@ class _ExpandedCaloriesViewState extends State<ExpandedCaloriesView> {
       runFunc = false;
       getMealCaloriesFromFirebase();
     }
+    dateSwitcher = DateSwitcher(getMealCaloriesFromFirebase);
     return Container(
         child: Scaffold(
       backgroundColor: glb.main_scaffold_background,
