@@ -1,16 +1,20 @@
-# sprightly
+<img src="images/sprightly_logo.png" alt="Sprightly Logo" width="480"/> &nbsp; &nbsp; 
 
-A new Flutter application.
+# Sprightly - A Diet Monitoring App 
 
-## Getting Started
+* Sprightly is an app built for the health-conscious, who are willing to go an extra step in monitoring their health and improving their fitness. 
+* Based on one’s weight, height, age and goals, Sprightly provides a personalized recommendation for a daily calorie intake and also stores the number of calories he/she has burned by exercising. 
+* Based on one’s weight, height, age and goals, Sprightly provides a personalized recommendation for a daily calorie intake and also stores the number of calories he/she has burned by exercising. 
+* It contains a well-designed food diary, with a detailed food description.
+* Main technologies used: Flutter & Firebase
 
-This project is a starting point for a Flutter application.
+* Developed by: Akshat Joshi & Suresh Kumar Chaturvedi
 
-A few resources to get you started if this is your first Flutter project:
+# Screenshots
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+<img src="screenshots/1.png" alt="Sprightly 1" width="230" height="480"/> &nbsp; &nbsp; <img src="screenshots/2.png" alt="Sprightly 2" width="230" height="480"/> <br>
+<img src="screenshots/4.png" alt="Sprightly 3" width="230" height="480"/> &nbsp; &nbsp; <img src="screenshots/5.png" alt="Sprightly 4" width="230" height="480"/> <br>
+<img src="screenshots/6.png" alt="Sprightly 5" width="230" height="480"/> &nbsp; &nbsp; <img src="screenshots/7.png" alt="Sprightly 6" width="230" height="480"/> <br>
+<img src="screenshots/9.png" alt="Sprightly 7" width="230" height="480"/> &nbsp; &nbsp; <img src="screenshots/10.png" alt="Sprightly 8" width="230" height="480"/> <br>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
