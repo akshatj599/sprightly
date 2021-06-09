@@ -10,10 +10,10 @@
 
 # Screenshots
 
-<img src="screenshots/1.png" alt="Sprightly 1" width="230" height="480"/> &nbsp; &nbsp; <img src="screenshots/2.png" alt="Sprightly 2" width="230" height="480"/> <br>
-<img src="screenshots/4.png" alt="Sprightly 3" width="230" height="480"/> &nbsp; &nbsp; <img src="screenshots/5.png" alt="Sprightly 4" width="230" height="480"/> <br>
-<img src="screenshots/6.png" alt="Sprightly 5" width="230" height="480"/> &nbsp; &nbsp; <img src="screenshots/7.png" alt="Sprightly 6" width="230" height="480"/> <br>
-<img src="screenshots/9.png" alt="Sprightly 7" width="230" height="480"/> &nbsp; &nbsp; <img src="screenshots/10.png" alt="Sprightly 8" width="230" height="480"/> <br>
+<img src="screenshots/1.png" alt="Sprightly 1" width="250" height="520"/> &nbsp; &nbsp; <img src="screenshots/2.png" alt="Sprightly 2" width="250" height="520"/> <br>
+<img src="screenshots/4.png" alt="Sprightly 3" width="250" height="520"/> &nbsp; &nbsp; <img src="screenshots/5.png" alt="Sprightly 4" width="250" height="520"/> <br>
+<img src="screenshots/6.png" alt="Sprightly 5" width="250" height="520"/> &nbsp; &nbsp; <img src="screenshots/7.png" alt="Sprightly 6" width="250" height="520"/> <br>
+<img src="screenshots/9.png" alt="Sprightly 7" width="250" height="520"/> &nbsp; &nbsp; <img src="screenshots/10.png" alt="Sprightly 8" width="250" height="520"/> <br>
 
 
 * Developed by: Akshat Joshi & Suresh Kumar Chaturvedi
