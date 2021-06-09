@@ -6,9 +6,9 @@
 * Based on one’s weight, height, age and goals, Sprightly provides a personalized recommendation for a daily calorie intake and also stores the number of calories he/she has burned by exercising. 
 * Based on one’s weight, height, age and goals, Sprightly provides a personalized recommendation for a daily calorie intake and also stores the number of calories he/she has burned by exercising. 
 * It contains a well-designed food diary, with a detailed food description.
+* Also features a dedicated dark mode.
 * Main technologies used: Flutter & Firebase
 
-* Developed by: Akshat Joshi & Suresh Kumar Chaturvedi
 
 # Screenshots
 
@@ -18,3 +18,4 @@
 <img src="screenshots/9.png" alt="Sprightly 7" width="230" height="480"/> &nbsp; &nbsp; <img src="screenshots/10.png" alt="Sprightly 8" width="230" height="480"/> <br>
 
 
+* Developed by: Akshat Joshi & Suresh Kumar Chaturvedi
