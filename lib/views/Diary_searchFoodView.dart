@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:sprightly/backend/keys.dart';
 import 'package:sprightly/views/Diary_showFoodDetailsView.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:sprightly/widgets/widgets.dart';
@@ -208,7 +209,7 @@ class _SearchFoodViewState extends State<SearchFoodView> {
 
   Future getPostFoodDetails(BuildContext context) async {
     final url = Uri.parse(
-        "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=sqLi8eWjX2iVjNW1X2GZC3fnJJqoKLbVsiCdYI5F");
+        "https://api.nal.usda.gov/fdc/v1/foods/search?api_key="+usda_api_key);
     var response = await http.post(url,
         headers: <String, String>{
           'Content-Type': 'application/json',
@@ -276,5 +277,3 @@ class _SearchFoodViewState extends State<SearchFoodView> {
     }
   }
 }
-
-//API Key:  sqLi8eWjX2iVjNW1X2GZC3fnJJqoKLbVsiCdYI5F
