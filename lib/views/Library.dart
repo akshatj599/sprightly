@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:sprightly/views/Library_API.dart';
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
+import 'package:http/http.dart' as http;
+import 'package:sprightly/backend/keys.dart';
 
 class Library extends StatefulWidget {
   @override
@@ -32,31 +37,36 @@ class _LibraryState extends State<Library> {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: double.infinity,
-                    width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(10, 5, 5, 5),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'images/healthcare.png',
-                            height: 70,
-                            width: 70,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "Health",
-                            style: getAppTextStyle(
-                                16, glb.main_foreground_header, true),
-                          ),
-                        ]),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: glb.main_background,
+                  child: GestureDetector(
+                    onTap: () async{
+                      await Navigator.push(context, MaterialPageRoute(builder: (context)=>LibraryAPI("Health")));
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: double.infinity,
+                      width: double.infinity,
+                      margin: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/healthcare.png',
+                              height: 70,
+                              width: 70,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Health",
+                              style: getAppTextStyle(
+                                  16, glb.main_foreground_header, true),
+                            ),
+                          ]),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: glb.main_background,
+                      ),
                     ),
                   ),
                 ),
