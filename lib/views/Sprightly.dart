@@ -4,6 +4,7 @@ import 'package:sprightly/views/Account_main.dart';
 import 'package:sprightly/views/Diary_main.dart';
 import 'package:sprightly/views/Home_main.dart';
 import 'package:sprightly/views/Recipe_main.dart';
+import 'package:sprightly/views/Library.dart';
 import 'package:sprightly/widgets/globals.dart' as glb;
 import 'package:sprightly/widgets/widgets.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -44,24 +45,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
     } else if (_navigationBarCurrIndex == 2) {
       newPage = Recipe();
     } else if (_navigationBarCurrIndex == 3) {
-      newPage = Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.warning,
-            color: glb.main_foreground_dimmer,
-            size: 50,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Under Construction",
-            style: getAppTextStyle(16, glb.main_foreground_dimmer, false),
-          ),
-        ],
-      ));
+      newPage = Library();
     } else {
       newPage = AccountView();
     }
@@ -93,7 +77,7 @@ class _SprightlyHomeState extends State<SprightlyHome> {
             icon: Icon(Icons.book_outlined), label: "Diary"),
         BottomNavigationBarItem(
             icon: Icon(Icons.emoji_food_beverage_outlined), label: "Recipes"),
-        BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: "Plans"),
+        BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: "Library"),
         BottomNavigationBarItem(
             icon: Icon(Icons.account_box_outlined), label: "Account"),
       ],

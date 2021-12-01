@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -209,7 +208,7 @@ class _SearchFoodViewState extends State<SearchFoodView> {
 
   Future getPostFoodDetails(BuildContext context) async {
     final url = Uri.parse(
-        "https://api.nal.usda.gov/fdc/v1/foods/search?api_key="+usda_api_key);
+        "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=" + usda_api_key);
     var response = await http.post(url,
         headers: <String, String>{
           'Content-Type': 'application/json',
