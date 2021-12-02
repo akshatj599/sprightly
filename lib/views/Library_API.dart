@@ -159,6 +159,7 @@ class _LibraryAPIState extends State<LibraryAPI> {
     });
     return ListView(
       shrinkWrap: true,
+      physics: BouncingScrollPhysics(),
       children: ls,
     );
   }

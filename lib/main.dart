@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Sprightly',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.blue
         ),
         home: AppHomeScreen());
   }

@@ -16,7 +16,6 @@ class DateSwitcher extends StatefulWidget {
 }
 
 class _DateSwitcherState extends State<DateSwitcher> {
-  
   void changeDate() {
     widget.curr = DateTime.now().add(Duration(days: glb.counter));
     if (glb.counter == 0)
@@ -57,13 +56,30 @@ class _DateSwitcherState extends State<DateSwitcher> {
           TextButton(
             onPressed: () {
               showDatePicker(
-                initialEntryMode: DatePickerEntryMode.input,
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(DateTime.now().year, 1, 1),
-                lastDate: DateTime(DateTime.now().year + 1, 1, 1),
-              ).then((datetime) {
-                glb.counter = DateTime.now().difference(datetime).inDays;
+                  initialEntryMode: DatePickerEntryMode.calendarOnly,
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(DateTime.now().year - 10, 1, 1),
+                  lastDate: DateTime.now(),
+                  builder: (BuildContext context, Widget child) {
+                    return Theme(
+                      data: ThemeData(
+                        primaryColor: glb.main_appBar,
+                        colorScheme: glb.dark_theme
+                            ? ColorScheme.dark(
+                                primary: glb.main_secondary,
+                                surface: glb.main_appBar)
+                            : ColorScheme.light(
+                                primary: glb.main_appBar,
+                                surface: glb.main_appBar),
+                        // buttonTheme:
+                        //     ButtonThemeData(textTheme: ButtonTextTheme.primary),
+                      ),
+                      child: child,
+                    );
+                  }).then((datetime) {
+                if (datetime == null) return;
+                glb.counter = datetime.difference(DateTime.now()).inDays;
                 print(glb.counter);
                 setState(() {
                   changeDate();

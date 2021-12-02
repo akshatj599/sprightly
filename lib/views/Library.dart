@@ -13,6 +13,7 @@ class Library extends StatefulWidget {
 }
 
 class _LibraryState extends State<Library> {
+  double size = 80;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +27,7 @@ class _LibraryState extends State<Library> {
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(10, 10, 10, 5),
             child: Text(
-              "What do you wish to read?",
+              "What do you wish to read about?",
               style: getAppTextStyle(16, glb.main_foreground_header, true),
             ),
             decoration: BoxDecoration(
@@ -63,8 +64,8 @@ class _LibraryState extends State<Library> {
                           children: [
                             Image.asset(
                               'images/healthcare.png',
-                              height: 90,
-                              width: 90,
+                              height: size,
+                              width: size,
                             ),
                             SizedBox(
                               height: 10,
@@ -109,8 +110,8 @@ class _LibraryState extends State<Library> {
                           children: [
                             Image.asset(
                               'images/fitness.png',
-                              height: 90,
-                              width: 90,
+                              height: size,
+                              width: size,
                             ),
                             SizedBox(
                               height: 10,
@@ -155,14 +156,14 @@ class _LibraryState extends State<Library> {
                       alignment: Alignment.center,
                       height: double.infinity,
                       width: double.infinity,
-                      margin: EdgeInsets.fromLTRB(10, 5, 5, 10),
+                      margin: EdgeInsets.fromLTRB(10, 5, 5, 5),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
                               'images/food.png',
-                              height: 90,
-                              width: 90,
+                              height: size,
+                              width: size,
                             ),
                             SizedBox(
                               height: 10,
@@ -201,14 +202,14 @@ class _LibraryState extends State<Library> {
                       alignment: Alignment.center,
                       height: double.infinity,
                       width: double.infinity,
-                      margin: EdgeInsets.fromLTRB(5, 5, 10, 10),
+                      margin: EdgeInsets.fromLTRB(5, 5, 10, 5),
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Image.asset(
                               'images/sports.png',
-                              height: 90,
-                              width: 90,
+                              height: size,
+                              width: size,
                             ),
                             SizedBox(
                               height: 10,
@@ -229,6 +230,104 @@ class _LibraryState extends State<Library> {
               ],
             ),
           ),
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LibraryAPI(
+                            "Yoga",
+                            Image.asset(
+                              'images/yoga.png',
+                            ),
+                          ),
+                        ),
+                      ).then((value) {
+                        glb.bnb.onTap(glb.bnb.currentIndex);
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: double.infinity,
+                      width: double.infinity,
+                      margin: EdgeInsets.fromLTRB(10, 5, 5, 10),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/yoga.png',
+                              height: size,
+                              width: size,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Yoga",
+                              style: getAppTextStyle(
+                                  16, glb.main_foreground_header, true),
+                            ),
+                          ]),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: glb.main_background,
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LibraryAPI(
+                            "Covid",
+                            Image.asset(
+                              'images/covid.png',
+                            ),
+                          ),
+                        ),
+                      ).then((value) {
+                        glb.bnb.onTap(glb.bnb.currentIndex);
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: double.infinity,
+                      width: double.infinity,
+                      margin: EdgeInsets.fromLTRB(5, 5, 10, 10),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/covid.png',
+                              height: size,
+                              width: size,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "COVID-19",
+                              style: getAppTextStyle(
+                                  16, glb.main_foreground_header, true),
+                            ),
+                          ]),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: glb.main_background,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
