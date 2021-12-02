@@ -16,6 +16,7 @@ class DateSwitcher extends StatefulWidget {
 }
 
 class _DateSwitcherState extends State<DateSwitcher> {
+  
   void changeDate() {
     widget.curr = DateTime.now().add(Duration(days: glb.counter));
     if (glb.counter == 0)
@@ -53,8 +54,25 @@ class _DateSwitcherState extends State<DateSwitcher> {
               },
               child: Text("<",
                   style: getAppTextStyle(16, Colors.red[400], false))),
-          Text(widget.dtToDisplay,
-              style: getAppTextStyle(16, glb.main_foreground_header, false)),
+          TextButton(
+            onPressed: () {
+              showDatePicker(
+                initialEntryMode: DatePickerEntryMode.input,
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(DateTime.now().year, 1, 1),
+                lastDate: DateTime(DateTime.now().year + 1, 1, 1),
+              ).then((datetime) {
+                glb.counter = DateTime.now().difference(datetime).inDays;
+                print(glb.counter);
+                setState(() {
+                  changeDate();
+                });
+              });
+            },
+            child: Text(widget.dtToDisplay,
+                style: getAppTextStyle(16, glb.main_foreground_header, false)),
+          ),
           TextButton(
               onPressed: () {
                 if (glb.counter < 0) {

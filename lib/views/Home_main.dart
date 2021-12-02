@@ -15,7 +15,6 @@ class _HomeState extends State<Home> {
 
   _HomeState() {
     print("Constructor of Home called "+runFn.toString());
-
   }
 
   Future<void> fnInitial() async {

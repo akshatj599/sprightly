@@ -38,8 +38,20 @@ class _LibraryState extends State<Library> {
               children: [
                 Expanded(
                   child: GestureDetector(
-                    onTap: () async{
-                      await Navigator.push(context, MaterialPageRoute(builder: (context)=>LibraryAPI("Health")));
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LibraryAPI(
+                            "Health",
+                            Image.asset(
+                              'images/healthcare.png',
+                            ),
+                          ),
+                        ),
+                      ).then((value) {
+                        glb.bnb.onTap(glb.bnb.currentIndex);
+                      });
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -51,8 +63,8 @@ class _LibraryState extends State<Library> {
                           children: [
                             Image.asset(
                               'images/healthcare.png',
-                              height: 70,
-                              width: 70,
+                              height: 90,
+                              width: 90,
                             ),
                             SizedBox(
                               height: 10,
@@ -71,31 +83,48 @@ class _LibraryState extends State<Library> {
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: double.infinity,
-                    width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(5, 5, 10, 5),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'images/fitness.png',
-                            height: 70,
-                            width: 70,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
+                  child: GestureDetector(
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LibraryAPI(
                             "Fitness",
-                            style: getAppTextStyle(
-                                16, glb.main_foreground_header, true),
+                            Image.asset(
+                              'images/fitness.png',
+                            ),
                           ),
-                        ]),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: glb.main_background,
+                        ),
+                      ).then((value) {
+                        glb.bnb.onTap(glb.bnb.currentIndex);
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: double.infinity,
+                      width: double.infinity,
+                      margin: EdgeInsets.fromLTRB(5, 5, 10, 5),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/fitness.png',
+                              height: 90,
+                              width: 90,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Fitness",
+                              style: getAppTextStyle(
+                                  16, glb.main_foreground_header, true),
+                            ),
+                          ]),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: glb.main_background,
+                      ),
                     ),
                   ),
                 )
@@ -106,60 +135,94 @@ class _LibraryState extends State<Library> {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: double.infinity,
-                    width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(10, 5, 5, 10),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'images/food.png',
-                            height: 70,
-                            width: 70,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
+                  child: GestureDetector(
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LibraryAPI(
                             "Food",
-                            style: getAppTextStyle(
-                                16, glb.main_foreground_header, true),
+                            Image.asset(
+                              'images/food.png',
+                            ),
                           ),
-                        ]),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: glb.main_background,
+                        ),
+                      ).then((value) {
+                        glb.bnb.onTap(glb.bnb.currentIndex);
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: double.infinity,
+                      width: double.infinity,
+                      margin: EdgeInsets.fromLTRB(10, 5, 5, 10),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/food.png',
+                              height: 90,
+                              width: 90,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Food",
+                              style: getAppTextStyle(
+                                  16, glb.main_foreground_header, true),
+                            ),
+                          ]),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: glb.main_background,
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: double.infinity,
-                    width: double.infinity,
-                    margin: EdgeInsets.fromLTRB(5, 5, 10, 10),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'images/sports.png',
-                            height: 70,
-                            width: 70,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
+                  child: GestureDetector(
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LibraryAPI(
                             "Sports",
-                            style: getAppTextStyle(
-                                16, glb.main_foreground_header, true),
+                            Image.asset(
+                              'images/sports.png',
+                            ),
                           ),
-                        ]),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: glb.main_background,
+                        ),
+                      ).then((value) {
+                        glb.bnb.onTap(glb.bnb.currentIndex);
+                      });
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: double.infinity,
+                      width: double.infinity,
+                      margin: EdgeInsets.fromLTRB(5, 5, 10, 10),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'images/sports.png',
+                              height: 90,
+                              width: 90,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Sports",
+                              style: getAppTextStyle(
+                                  16, glb.main_foreground_header, true),
+                            ),
+                          ]),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: glb.main_background,
+                      ),
                     ),
                   ),
                 )

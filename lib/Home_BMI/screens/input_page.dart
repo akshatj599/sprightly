@@ -46,11 +46,11 @@ class _InputPageState extends State<InputPage> {
           //     offset: Offset(0, 3), // changes position of shadow
           //   ),
           // ],
-                  color: glb.main_secondary,
+                  color: glb.main_background,
                   borderRadius: BorderRadius.circular(10)),
               child: Text(
                 "Calculate Your BMI",
-                style: getAppTextStyle(18, Colors.grey[900], true),
+                style: getAppTextStyle(18, glb.main_foreground_header, true),
               ),
             ),
             SizedBox(height: 10),
