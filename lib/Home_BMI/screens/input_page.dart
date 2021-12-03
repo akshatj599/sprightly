@@ -38,14 +38,14 @@ class _InputPageState extends State<InputPage> {
               margin: EdgeInsets.symmetric(horizontal: 5),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-          //       boxShadow: [
-          //   BoxShadow(
-          //     color: Colors.black.withOpacity(0.1),
-          //     // spreadRadius: 5,
-          //     blurRadius: 5,
-          //     offset: Offset(0, 3), // changes position of shadow
-          //   ),
-          // ],
+                  //       boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.black.withOpacity(0.1),
+                  //     // spreadRadius: 5,
+                  //     blurRadius: 5,
+                  //     offset: Offset(0, 3), // changes position of shadow
+                  //   ),
+                  // ],
                   color: glb.main_background,
                   borderRadius: BorderRadius.circular(10)),
               child: Text(
@@ -190,12 +190,23 @@ class _InputPageState extends State<InputPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             RoundIconButton(
-                                icon: FontAwesomeIcons.minus,
-                                onPressed: () {
-                                  setState(() {
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () {
+                                setState(() {
+                                  if (weight > 0) {
                                     weight--;
-                                  });
-                                }),
+                                  }
+                                });
+                              },
+                              onLongPressed: () {
+                                setState(() {
+                                  if (weight > 10) {
+                                    weight-=10;
+                                  } else
+                                    weight = 0;
+                                });
+                              },
+                            ),
                             SizedBox(
                               width: 10.0,
                             ),
@@ -203,7 +214,15 @@ class _InputPageState extends State<InputPage> {
                               icon: FontAwesomeIcons.plus,
                               onPressed: () {
                                 setState(() {
-                                  weight++;
+                                  if (weight < 200) weight++;
+                                });
+                              },
+                              onLongPressed: () {
+                                setState(() {
+                                  if (weight < 190)
+                                    weight += 10;
+                                  else
+                                    weight = 200;
                                 });
                               },
                             ),
@@ -252,7 +271,17 @@ class _InputPageState extends State<InputPage> {
                               onPressed: () {
                                 setState(
                                   () {
-                                    age--;
+                                    if (age > 0) age--;
+                                  },
+                                );
+                              },
+                              onLongPressed: () {
+                                setState(
+                                  () {
+                                    if (age > 10)
+                                      age -= 10;
+                                    else
+                                      age = 0;
                                   },
                                 );
                               },
@@ -261,12 +290,21 @@ class _InputPageState extends State<InputPage> {
                               width: 10.0,
                             ),
                             RoundIconButton(
-                                icon: FontAwesomeIcons.plus,
-                                onPressed: () {
-                                  setState(() {
-                                    age++;
-                                  });
-                                })
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () {
+                                setState(() {
+                                  if (age < 150) age++;
+                                });
+                              },
+                              onLongPressed: () {
+                                setState(() {
+                                  if (age < 140)
+                                    age += 10;
+                                  else
+                                    age = 150;
+                                });
+                              },
+                            )
                           ],
                         )
                       ],
